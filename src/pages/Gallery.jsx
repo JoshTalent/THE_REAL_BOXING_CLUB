@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../components/Navbar";
@@ -23,10 +22,18 @@ import {
   Crown,
   TrendingUp,
   ArrowRight,
-  BookOpen
+  BookOpen,
 } from "lucide-react";
 
-import { Gallery_01, Coach, valentin4, frank3, valentin3, valentin, frank2 } from "../assets";
+import {
+  Gallery_01,
+  Coach,
+  valentin4,
+  frank3,
+  valentin3,
+  valentin,
+  frank2,
+} from "../assets";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -76,13 +83,14 @@ const Gallery = () => {
       src: frank2,
       thumbnail: frank2,
       title: "Morning Boxing Fundamentals",
-      description: "Members perfecting their technique in our 6 AM fundamentals class",
+      description:
+        "Members perfecting their technique in our 6 AM fundamentals class",
       date: "2024-01-15",
       views: 1242,
       likes: 89,
       comments: 23,
       tags: ["Training", "Beginners", "Technique"],
-      featured: true
+      featured: true,
     },
     {
       id: 2,
@@ -98,7 +106,7 @@ const Gallery = () => {
       likes: 156,
       comments: 42,
       tags: ["Cardio", "Workout", "Advanced"],
-      featured: true
+      featured: true,
     },
     {
       id: 3,
@@ -112,7 +120,7 @@ const Gallery = () => {
       views: 1895,
       likes: 123,
       comments: 31,
-      tags: ["Beginners", "Community", "Training"]
+      tags: ["Beginners", "Community", "Training"],
     },
     {
       id: 4, // FIXED: Changed from 3 to 4 for unique ID
@@ -121,12 +129,13 @@ const Gallery = () => {
       src: Coach,
       thumbnail: Coach,
       title: "OUR COACH",
-      description: "Champions creator, discipline teacher and technique facilitator",
+      description:
+        "Champions creator, discipline teacher and technique facilitator",
       date: "2024-01-12",
       views: 1895,
       likes: 123,
       comments: 31,
-      tags: ["Coach", "Training", "Expert"]
+      tags: ["Coach", "Training", "Expert"],
     },
     {
       id: 5, // FIXED: Changed from 3 to 5 for unique ID
@@ -135,12 +144,13 @@ const Gallery = () => {
       src: valentin3,
       thumbnail: valentin3,
       title: "Our Champion at IBA Championships",
-      description: "Champions creator, discipline teacher and technique facilitator",
+      description:
+        "Champions creator, discipline teacher and technique facilitator",
       date: "2024-01-12",
       views: 1895,
       likes: 123,
       comments: 31,
-      tags: ["Championship", "Competition", "Success"]
+      tags: ["Championship", "Competition", "Success"],
     },
     {
       id: 6, // FIXED: Changed from 3 to 6 for unique ID
@@ -149,12 +159,13 @@ const Gallery = () => {
       src: valentin4,
       thumbnail: valentin4,
       title: "Valentin The Cap",
-      description: "Champions creator, discipline teacher and technique facilitator",
+      description:
+        "Champions creator, discipline teacher and technique facilitator",
       date: "2024-01-12",
       views: 1895,
       likes: 123,
       comments: 31,
-      tags: ["Profile", "Boxer", "Athlete"]
+      tags: ["Profile", "Boxer", "Athlete"],
     },
     {
       id: 7, // FIXED: Changed from 3 to 7 for unique ID
@@ -163,25 +174,31 @@ const Gallery = () => {
       src: frank3,
       thumbnail: frank3,
       title: "Frank The Beast",
-      description: "Champions creator, discipline teacher and technique facilitator",
+      description:
+        "Champions creator, discipline teacher and technique facilitator",
       date: "2024-01-12",
       views: 1895,
       likes: 123,
       comments: 31,
-      tags: ["Profile", "Boxer", "Athlete"]
+      tags: ["Profile", "Boxer", "Athlete"],
     },
   ];
 
   // Safe category formatter function - FIXED: Handles undefined/null
   const formatCategory = (category) => {
-    if (!category || typeof category !== 'string') return '';
-    return category.replace('-', ' ');
+    if (!category || typeof category !== "string") return "";
+    return category.replace("-", " ");
   };
 
-  const trendingMedia = galleryMedia.filter(item => item.featured);
-  const filteredMedia = galleryMedia.filter(item => {
-    if (selectedCategory !== "all" && item.category !== selectedCategory) return false;
-    if (searchQuery && !item.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+  const trendingMedia = galleryMedia.filter((item) => item.featured);
+  const filteredMedia = galleryMedia.filter((item) => {
+    if (selectedCategory !== "all" && item.category !== selectedCategory)
+      return false;
+    if (
+      searchQuery &&
+      !item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+      return false;
     if (selectedTag && !item.tags.includes(selectedTag)) return false;
     return true;
   });
@@ -197,20 +214,20 @@ const Gallery = () => {
 
   const handleTouchEnd = () => {
     if (!touchStartX.current || !touchEndX.current) return;
-    
+
     const diff = touchStartX.current - touchEndX.current;
     const minSwipeDistance = 50;
-    
+
     if (Math.abs(diff) > minSwipeDistance) {
       if (diff > 0 && selectedMedia) {
         // Swipe left - next
-        navigateMedia('next');
+        navigateMedia("next");
       } else if (diff < 0 && selectedMedia) {
         // Swipe right - previous
-        navigateMedia('prev');
+        navigateMedia("prev");
       }
     }
-    
+
     touchStartX.current = 0;
     touchEndX.current = 0;
   };
@@ -218,24 +235,25 @@ const Gallery = () => {
   const openMedia = (media, index) => {
     setSelectedMedia(media);
     setCurrentIndex(index);
-    setViewedItems(prev => new Set([...prev, media.id]));
+    setViewedItems((prev) => new Set([...prev, media.id]));
   };
 
   const closeMedia = () => setSelectedMedia(null);
 
   const navigateMedia = (direction) => {
     let newIndex;
-    if (direction === 'next') {
+    if (direction === "next") {
       newIndex = (currentIndex + 1) % filteredMedia.length;
     } else {
-      newIndex = (currentIndex - 1 + filteredMedia.length) % filteredMedia.length;
+      newIndex =
+        (currentIndex - 1 + filteredMedia.length) % filteredMedia.length;
     }
     setCurrentIndex(newIndex);
     setSelectedMedia(filteredMedia[newIndex]);
   };
 
   const toggleLike = (id) => {
-    setLikedItems(prev => {
+    setLikedItems((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(id)) {
         newSet.delete(id);
@@ -274,7 +292,7 @@ const Gallery = () => {
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 animate-pulse-slow"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60"></div>
-          
+
           {/* Animated particles */}
           <div className="absolute inset-0">
             {[...Array(20)].map((_, i) => (
@@ -328,8 +346,9 @@ const Gallery = () => {
               </h1>
 
               <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl">
-                Witness the power, precision, and passion that defines The Real Boxing Club. 
-                Explore our world through stunning visuals and inspiring stories.
+                Witness the power, precision, and passion that defines The Real
+                Boxing Club. Explore our world through stunning visuals and
+                inspiring stories.
               </p>
 
               {/* Quick Stats */}
@@ -338,7 +357,7 @@ const Gallery = () => {
                   { value: "200+", label: "High-Res Media", icon: Eye },
                   { value: "50+", label: "Success Stories", icon: Trophy },
                   { value: "1.2M", label: "Total Views", icon: TrendingUp },
-                  { value: "4.9★", label: "Community Rating", icon: Star }
+                  { value: "4.9★", label: "Community Rating", icon: Star },
                 ].map((stat, idx) => (
                   <motion.div
                     key={idx}
@@ -347,7 +366,9 @@ const Gallery = () => {
                     transition={{ delay: 0.3 + idx * 0.1 }}
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 transition-all duration-300"
                   >
-                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-2xl font-bold text-white mb-1">
+                      {stat.value}
+                    </div>
                     <div className="text-xs text-gray-300">{stat.label}</div>
                   </motion.div>
                 ))}
@@ -400,7 +421,9 @@ const Gallery = () => {
                         <h3 className="font-bold text-sm">{item.title}</h3>
                         <div className="flex items-center gap-2 mt-2">
                           <Eye className="w-3 h-3" />
-                          <span className="text-xs">{item.views.toLocaleString()}</span>
+                          <span className="text-xs">
+                            {item.views.toLocaleString()}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -454,7 +477,7 @@ const Gallery = () => {
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         loading="lazy"
                       />
-                      
+
                       {/* Video Overlay */}
                       {media.type === "video" && (
                         <div className="absolute inset-0 flex items-center justify-center bg-black/20">
@@ -479,11 +502,15 @@ const Gallery = () => {
                             }}
                             className={`p-2 rounded-full backdrop-blur-sm ${
                               likedItems.has(media.id)
-                                ? 'bg-red-500/90 text-white'
-                                : 'bg-black/50 text-white hover:bg-black/70'
+                                ? "bg-red-500/90 text-white"
+                                : "bg-black/50 text-white hover:bg-black/70"
                             }`}
                           >
-                            <Heart className={`w-4 h-4 ${likedItems.has(media.id) ? 'fill-current' : ''}`} />
+                            <Heart
+                              className={`w-4 h-4 ${
+                                likedItems.has(media.id) ? "fill-current" : ""
+                              }`}
+                            />
                           </button>
                           <button
                             onClick={(e) => {
@@ -526,14 +553,18 @@ const Gallery = () => {
                     {/* Info Section */}
                     <div className="p-4 sm:p-6">
                       <div className="flex items-start justify-between mb-2">
-                        <h3 className="font-bold text-gray-900 text-sm sm:text-base line-clamp-1">{media.title}</h3>
+                        <h3 className="font-bold text-gray-900 text-sm sm:text-base line-clamp-1">
+                          {media.title}
+                        </h3>
                         <div className="flex items-center gap-1 text-gray-500 text-xs">
                           <ThumbsUp className="w-3 h-3" />
                           <span>{media.likes}</span>
                         </div>
                       </div>
-                      <p className="text-gray-600 text-xs sm:text-sm mb-3 line-clamp-2">{media.description}</p>
-                      
+                      <p className="text-gray-600 text-xs sm:text-sm mb-3 line-clamp-2">
+                        {media.description}
+                      </p>
+
                       {/* Tags */}
                       <div className="flex flex-wrap gap-1 mb-3">
                         {media.tags.slice(0, 2).map((tag, tagIndex) => (
@@ -545,7 +576,9 @@ const Gallery = () => {
                           </span>
                         ))}
                         {media.tags.length > 2 && (
-                          <span className="text-xs text-gray-500">+{media.tags.length - 2}</span>
+                          <span className="text-xs text-gray-500">
+                            +{media.tags.length - 2}
+                          </span>
                         )}
                       </div>
 
@@ -553,20 +586,26 @@ const Gallery = () => {
                       <div className="flex items-center justify-between text-xs text-gray-500">
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          <span>{new Date(media.date).toLocaleDateString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric',
-                            year: 'numeric' 
-                          })}</span>
+                          <span>
+                            {new Date(media.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </span>
                         </div>
                         <div className="flex items-center gap-3">
                           <div className="flex items-center gap-1">
                             <MessageCircle className="w-3 h-3" />
                             <span>{media.comments}</span>
                           </div>
-                          <div className={`w-2 h-2 rounded-full ${
-                            viewedItems.has(media.id) ? 'bg-blue-500' : 'bg-gray-300'
-                          }`}></div>
+                          <div
+                            className={`w-2 h-2 rounded-full ${
+                              viewedItems.has(media.id)
+                                ? "bg-blue-500"
+                                : "bg-gray-300"
+                            }`}
+                          ></div>
                         </div>
                       </div>
                     </div>
@@ -617,7 +656,9 @@ const Gallery = () => {
                           {media.description}
                         </p>
                         <div className="flex items-center justify-between text-xs text-gray-500">
-                          <span>{new Date(media.date).toLocaleDateString()}</span>
+                          <span>
+                            {new Date(media.date).toLocaleDateString()}
+                          </span>
                           <div className="flex items-center gap-3">
                             <div className="flex items-center gap-1">
                               <Eye className="w-3 h-3" />
@@ -651,7 +692,8 @@ const Gallery = () => {
                 No media found
               </h3>
               <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                Try adjusting your search or filter to find what you're looking for.
+                Try adjusting your search or filter to find what you're looking
+                for.
               </p>
               <button
                 onClick={() => {
@@ -697,11 +739,15 @@ const Gallery = () => {
                     }}
                     className={`p-3 rounded-full backdrop-blur-sm ${
                       likedItems.has(selectedMedia.id)
-                        ? 'bg-red-500/90 text-white'
-                        : 'bg-black/50 text-white'
+                        ? "bg-red-500/90 text-white"
+                        : "bg-black/50 text-white"
                     }`}
                   >
-                    <Heart className={`w-5 h-5 ${likedItems.has(selectedMedia.id) ? 'fill-current' : ''}`} />
+                    <Heart
+                      className={`w-5 h-5 ${
+                        likedItems.has(selectedMedia.id) ? "fill-current" : ""
+                      }`}
+                    />
                   </button>
                   <button
                     onClick={(e) => {
@@ -727,13 +773,13 @@ const Gallery = () => {
               {filteredMedia.length > 1 && (
                 <>
                   <button
-                    onClick={() => navigateMedia('prev')}
+                    onClick={() => navigateMedia("prev")}
                     className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-blue-600 transition-all duration-200 z-10 backdrop-blur-sm"
                   >
                     <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                   </button>
                   <button
-                    onClick={() => navigateMedia('next')}
+                    onClick={() => navigateMedia("next")}
                     className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-blue-600 transition-all duration-200 z-10 backdrop-blur-sm"
                   >
                     <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -775,14 +821,21 @@ const Gallery = () => {
                     <div className="space-y-4">
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            selectedMedia.category === 'class-action' ? 'bg-blue-100 text-blue-700' :
-                            selectedMedia.category === 'coach' ? 'bg-green-100 text-green-700' :
-                            selectedMedia.category === 'championship' ? 'bg-red-100 text-red-700' :
-                            selectedMedia.category === 'profile' ? 'bg-yellow-100 text-yellow-700' :
-                            'bg-purple-100 text-purple-700'
-                          }`}>
-                            {formatCategory(selectedMedia.category)} {/* FIXED: Using safe formatter */}
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                              selectedMedia.category === "class-action"
+                                ? "bg-blue-100 text-blue-700"
+                                : selectedMedia.category === "coach"
+                                ? "bg-green-100 text-green-700"
+                                : selectedMedia.category === "championship"
+                                ? "bg-red-100 text-red-700"
+                                : selectedMedia.category === "profile"
+                                ? "bg-yellow-100 text-yellow-700"
+                                : "bg-purple-100 text-purple-700"
+                            }`}
+                          >
+                            {formatCategory(selectedMedia.category)}{" "}
+                            {/* FIXED: Using safe formatter */}
                           </span>
                           {selectedMedia.featured && (
                             <span className="px-2 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold rounded-full flex items-center gap-1">
@@ -794,28 +847,38 @@ const Gallery = () => {
                         <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
                           {selectedMedia.title}
                         </h2>
-                        <p className="text-gray-600">{selectedMedia.description}</p>
+                        <p className="text-gray-600">
+                          {selectedMedia.description}
+                        </p>
                       </div>
 
                       {/* Stats */}
                       <div className="grid grid-cols-3 gap-4 py-4 border-y border-gray-200">
                         <div className="text-center">
-                          <div className="text-lg font-bold text-gray-900">{selectedMedia.views.toLocaleString()}</div>
+                          <div className="text-lg font-bold text-gray-900">
+                            {selectedMedia.views.toLocaleString()}
+                          </div>
                           <div className="text-xs text-gray-500">Views</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-lg font-bold text-gray-900">{selectedMedia.likes}</div>
+                          <div className="text-lg font-bold text-gray-900">
+                            {selectedMedia.likes}
+                          </div>
                           <div className="text-xs text-gray-500">Likes</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-lg font-bold text-gray-900">{selectedMedia.comments}</div>
+                          <div className="text-lg font-bold text-gray-900">
+                            {selectedMedia.comments}
+                          </div>
                           <div className="text-xs text-gray-500">Comments</div>
                         </div>
                       </div>
 
                       {/* Tags */}
                       <div>
-                        <h3 className="font-semibold text-gray-900 mb-2">Tags</h3>
+                        <h3 className="font-semibold text-gray-900 mb-2">
+                          Tags
+                        </h3>
                         <div className="flex flex-wrap gap-2">
                           {selectedMedia.tags.map((tag, tagIndex) => (
                             <span
@@ -832,12 +895,17 @@ const Gallery = () => {
                       <div className="flex items-center justify-between text-sm text-gray-500">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
-                          <span>{new Date(selectedMedia.date).toLocaleDateString('en-US', {
-                            weekday: 'long',
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}</span>
+                          <span>
+                            {new Date(selectedMedia.date).toLocaleDateString(
+                              "en-US",
+                              {
+                                weekday: "long",
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              }
+                            )}
+                          </span>
                         </div>
                       </div>
 
@@ -847,12 +915,18 @@ const Gallery = () => {
                           onClick={() => toggleLike(selectedMedia.id)}
                           className={`flex-1 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                             likedItems.has(selectedMedia.id)
-                              ? 'bg-red-50 text-red-600 border border-red-200'
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              ? "bg-red-50 text-red-600 border border-red-200"
+                              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                           }`}
                         >
-                          <Heart className={`w-5 h-5 ${likedItems.has(selectedMedia.id) ? 'fill-current' : ''}`} />
-                          {likedItems.has(selectedMedia.id) ? 'Liked' : 'Like'}
+                          <Heart
+                            className={`w-5 h-5 ${
+                              likedItems.has(selectedMedia.id)
+                                ? "fill-current"
+                                : ""
+                            }`}
+                          />
+                          {likedItems.has(selectedMedia.id) ? "Liked" : "Like"}
                         </button>
                         <button
                           onClick={() => handleShare(selectedMedia)}
@@ -914,10 +988,10 @@ const Gallery = () => {
                     </span>
                   </h2>
                   <p className="text-lg text-gray-300 mb-8 max-w-2xl">
-                    Join The Real Boxing Club and create your own success story. 
+                    Join The Real Boxing Club and create your own success story.
                     Our members' journeys become part of our legacy gallery.
                   </p>
-                  
+
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/25 flex items-center justify-center gap-3">
                       Start Free Trial
@@ -950,7 +1024,9 @@ const Gallery = () => {
                             <h3 className="font-bold text-sm">{item.title}</h3>
                             <div className="flex items-center gap-2 mt-2">
                               <ThumbsUp className="w-3 h-3" />
-                              <span className="text-xs">{item.likes} likes</span>
+                              <span className="text-xs">
+                                {item.likes} likes
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -960,7 +1036,9 @@ const Gallery = () => {
                   <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-2xl shadow-lg hidden lg:block">
                     <div className="text-2xl font-bold">Join 200+</div>
                     <div className="text-sm">Featured Members</div>
-                    <div className="text-xs opacity-80">Showcase Your Journey</div>
+                    <div className="text-xs opacity-80">
+                      Showcase Your Journey
+                    </div>
                   </div>
                 </div>
               </div>
@@ -971,9 +1049,9 @@ const Gallery = () => {
 
       {/* Floating Action Button for Mobile */}
       <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className={`fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center z-40 transition-all duration-300 lg:hidden ${
-          isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
         <ArrowRight className="w-6 h-6 transform -rotate-90" />

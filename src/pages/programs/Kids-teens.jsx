@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../../components/Navbar";
@@ -19,8 +18,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-
-import { frank2 , frank3 ,valentin2 , Anelica, valentin3 } from "../../assets";
+import { frank2, frank3, valentin2, Anelica, valentin3 } from "../../assets";
 
 const KidsTeensBoxing = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
@@ -147,7 +145,7 @@ const KidsTeensBoxing = () => {
     {
       id: 2,
       type: "image",
-      src: Anelica ,
+      src: Anelica,
       title: "Anelica NSABIMANA",
       description: "Engaging games that teach coordination and boxing basics",
       category: "activities",
@@ -160,7 +158,6 @@ const KidsTeensBoxing = () => {
       description: "Certified coaches ensuring proper technique and safety",
       category: "coaching",
     },
- 
   ];
 
   const openMedia = (media, index) => {
@@ -338,13 +335,13 @@ const KidsTeensBoxing = () => {
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-100 rounded-full mb-6">
               <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
               <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">
-                 Champions in Action
+                Champions in Action
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
               See Our{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
-                 Champions
+                Champions
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -640,9 +637,7 @@ const KidsTeensBoxing = () => {
               transition={{ duration: 0.8 }}
             >
               <img
-                src={
-                  valentin3
-                }
+                src={valentin3}
                 alt="Young boxer training"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />

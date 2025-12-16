@@ -1,12 +1,21 @@
-"use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { Music, Heart, Zap, Users, Trophy, Sparkles, Play, X, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Music,
+  Heart,
+  Zap,
+  Users,
+  Trophy,
+  Sparkles,
+  Play,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
-
-import { frank3  , frank2} from "../../assets";
+import { frank3, frank2 } from "../../assets";
 
 const BoxingFitness = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
@@ -16,33 +25,33 @@ const BoxingFitness = () => {
     {
       icon: Heart,
       title: "Full-Body Calorie Burn",
-      desc: "Torch 500-800 calories per session with high-intensity boxing workouts"
+      desc: "Torch 500-800 calories per session with high-intensity boxing workouts",
     },
     {
       icon: Zap,
       title: "Improved Strength & Endurance",
-      desc: "Build lean muscle and cardiovascular stamina through dynamic training"
+      desc: "Build lean muscle and cardiovascular stamina through dynamic training",
     },
     {
       icon: Trophy,
       title: "Enhanced Coordination",
-      desc: "Develop precision, balance, and agility with technical boxing drills"
+      desc: "Develop precision, balance, and agility with technical boxing drills",
     },
     {
       icon: Sparkles,
       title: "Stress Relief & Mental Clarity",
-      desc: "Release endorphins and clear your mind through focused physical activity"
+      desc: "Release endorphins and clear your mind through focused physical activity",
     },
     {
       icon: Users,
       title: "Community Support",
-      desc: "Join a motivating environment with like-minded fitness enthusiasts"
+      desc: "Join a motivating environment with like-minded fitness enthusiasts",
     },
     {
       icon: Music,
       title: "Fun & Engaging Workouts",
-      desc: "Never get bored with constantly varied routines and energizing music"
-    }
+      desc: "Never get bored with constantly varied routines and energizing music",
+    },
   ];
 
   const programHighlights = [
@@ -52,54 +61,62 @@ const BoxingFitness = () => {
       features: ["HIIT Training", "Combination Drills", "Footwork Circuits"],
       intensity: "High-Energy",
       duration: "60 mins",
-      color: "from-blue-400 to-cyan-400"
+      color: "from-blue-400 to-cyan-400",
     },
     {
       title: "Strength & Conditioning",
       desc: "Bodyweight exercises, resistance training, and boxing drills to build muscular strength and endurance.",
-      features: ["Resistance Bands", "Bodyweight Circuits", "Core Strengthening"],
+      features: [
+        "Resistance Bands",
+        "Bodyweight Circuits",
+        "Core Strengthening",
+      ],
       intensity: "Moderate-High",
       duration: "45 mins",
-      color: "from-blue-500 to-blue-700"
+      color: "from-blue-500 to-blue-700",
     },
     {
       title: "Flexibility & Mobility",
       desc: "Dynamic stretches and mobility exercises to improve flexibility and reduce injury risk.",
-      features: ["Dynamic Stretching", "Mobility Drills", "Recovery Techniques"],
+      features: [
+        "Dynamic Stretching",
+        "Mobility Drills",
+        "Recovery Techniques",
+      ],
       intensity: "Low-Moderate",
       duration: "30 mins",
-      color: "from-blue-600 to-blue-800"
-    }
+      color: "from-blue-600 to-blue-800",
+    },
   ];
 
   const stats = [
     { number: "500-800", label: "Calories Burned per Session" },
     { number: "100%", label: "No Sparring Required" },
     { number: "All Levels", label: "Beginner to Advanced Welcome" },
-    { number: "5.0 ★", label: "Member Satisfaction Rating" }
+    { number: "5.0 ★", label: "Member Satisfaction Rating" },
   ];
 
   const galleryMedia = [
     {
       id: 1,
       type: "image",
-      src:frank2,
+      src: frank2,
       title: "Group Energy",
-      desc: "High-energy classes with motivating music"
+      desc: "High-energy classes with motivating music",
     },
     {
       id: 2,
       type: "image",
       src: frank3,
       title: "Non-Intimidating",
-      desc: "Welcoming environment for all fitness levels"
+      desc: "Welcoming environment for all fitness levels",
     },
     {
       id: 3,
       type: "image",
-      src:frank2,
+      src: frank2,
       title: "Fun Atmosphere",
-      desc: "Enjoyable workouts that feel like play"
+      desc: "Enjoyable workouts that feel like play",
     },
     {
       id: 4,
@@ -107,8 +124,8 @@ const BoxingFitness = () => {
       src: "https://player.vimeo.com/video/824804225?h=6c8d5d5a5f",
       thumbnail: frank3,
       title: "Fitness Class Preview",
-      desc: "Experience the energy of our boxing fitness sessions"
-    }
+      desc: "Experience the energy of our boxing fitness sessions",
+    },
   ];
 
   const openMedia = (media, index) => {
@@ -122,7 +139,7 @@ const BoxingFitness = () => {
 
   const navigateMedia = (direction) => {
     let newIndex;
-    if (direction === 'next') {
+    if (direction === "next") {
       newIndex = (currentIndex + 1) % galleryMedia.length;
     } else {
       newIndex = (currentIndex - 1 + galleryMedia.length) % galleryMedia.length;
@@ -158,7 +175,7 @@ const BoxingFitness = () => {
                   NO SPARRING • ALL FITNESS LEVELS
                 </span>
               </div>
-              
+
               <h1 className="text-6xl md:text-7xl font-black leading-tight">
                 Boxing for
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
@@ -167,8 +184,10 @@ const BoxingFitness = () => {
               </h1>
 
               <p className="text-xl text-gray-600 leading-relaxed">
-                <strong>High-energy workouts</strong> designed for anyone seeking cardio, weight loss, and toning without sparring. 
-                Experience the perfect blend of boxing techniques and fitness in a fun, music-driven environment.
+                <strong>High-energy workouts</strong> designed for anyone
+                seeking cardio, weight loss, and toning without sparring.
+                Experience the perfect blend of boxing techniques and fitness in
+                a fun, music-driven environment.
               </p>
             </motion.div>
 
@@ -177,16 +196,23 @@ const BoxingFitness = () => {
               className="grid grid-cols-2 gap-6"
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.8 } },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { delay: 0.3, duration: 0.8 },
+                },
               }}
             >
               {[
                 "🎵 Music-Driven Workouts",
-                "💪 No Sparring Required", 
+                "💪 No Sparring Required",
                 "👥 Supportive Community",
-                "🔥 500-800 Calories/Session"
+                "🔥 500-800 Calories/Session",
               ].map((feature, index) => (
-                <div key={index} className="flex items-center gap-3 text-gray-700">
+                <div
+                  key={index}
+                  className="flex items-center gap-3 text-gray-700"
+                >
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                   <span className="text-sm font-medium">{feature}</span>
                 </div>
@@ -197,7 +223,11 @@ const BoxingFitness = () => {
               className="flex flex-wrap gap-4"
               variants={{
                 hidden: { y: 30, opacity: 0 },
-                visible: { y: 0, opacity: 1, transition: { delay: 0.8, duration: 0.8 } },
+                visible: {
+                  y: 0,
+                  opacity: 1,
+                  transition: { delay: 0.8, duration: 0.8 },
+                },
               }}
             >
               <button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">
@@ -226,8 +256,12 @@ const BoxingFitness = () => {
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />
               <div className="mt-4 text-center text-white">
-                <h3 className="text-xl font-bold">Energetic Music-Driven Workouts</h3>
-                <p className="text-gray-300 text-sm mt-1">High-energy classes that make fitness fun</p>
+                <h3 className="text-xl font-bold">
+                  Energetic Music-Driven Workouts
+                </h3>
+                <p className="text-gray-300 text-sm mt-1">
+                  High-energy classes that make fitness fun
+                </p>
               </div>
             </motion.div>
           </div>
@@ -274,10 +308,14 @@ const BoxingFitness = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              Why Boxing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">Fitness?</span>
+              Why Boxing{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+                Fitness?
+              </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Experience the perfect blend of boxing intensity and fitness fun designed for real results
+              Experience the perfect blend of boxing intensity and fitness fun
+              designed for real results
             </p>
           </motion.div>
 
@@ -297,9 +335,7 @@ const BoxingFitness = () => {
                 <h3 className="text-xl font-black text-gray-900 mb-3">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {benefit.desc}
-                </p>
+                <p className="text-gray-600 leading-relaxed">{benefit.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -322,7 +358,10 @@ const BoxingFitness = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              Fitness <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">Programs</span>
+              Fitness{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+                Programs
+              </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Three core components designed for maximum results and endless fun
@@ -340,10 +379,12 @@ const BoxingFitness = () => {
                 whileHover={{ scale: 1.02, y: -5 }}
               >
                 <div className="text-center mb-6">
-                  <div className={`w-20 h-20 bg-gradient-to-r ${program.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <div
+                    className={`w-20 h-20 bg-gradient-to-r ${program.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                  >
                     <Trophy className="w-10 h-10 text-white" />
                   </div>
-                  
+
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-2xl font-black text-gray-900">
                       {program.title}
@@ -355,14 +396,17 @@ const BoxingFitness = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <p className="text-gray-600 mb-6 leading-relaxed text-center">
                   {program.desc}
                 </p>
 
                 <div className="space-y-3">
                   {program.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3 text-gray-700">
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 text-gray-700"
+                    >
                       <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
                       <span className="text-sm font-medium">{feature}</span>
                     </div>
@@ -372,7 +416,9 @@ const BoxingFitness = () => {
                 <div className="mt-6 pt-4 border-t border-gray-200">
                   <div className="flex justify-between items-center text-sm text-gray-500">
                     <span>Intensity:</span>
-                    <span className="font-semibold text-blue-600">{program.intensity}</span>
+                    <span className="font-semibold text-blue-600">
+                      {program.intensity}
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -397,10 +443,14 @@ const BoxingFitness = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              See Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">Fitness Community</span>
+              See Our{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+                Fitness Community
+              </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See why our fitness boxing classes are the most enjoyable way to get in shape
+              See why our fitness boxing classes are the most enjoyable way to
+              get in shape
             </p>
           </motion.div>
 
@@ -420,7 +470,7 @@ const BoxingFitness = () => {
                     alt={media.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  
+
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -457,9 +507,11 @@ const BoxingFitness = () => {
                 Ready to Transform Your Fitness?
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                Join our fun, high-energy boxing fitness classes today. No experience needed - just bring your energy and we'll handle the rest!
+                Join our fun, high-energy boxing fitness classes today. No
+                experience needed - just bring your energy and we'll handle the
+                rest!
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4">
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
                   Start Free Trial Class
@@ -470,7 +522,8 @@ const BoxingFitness = () => {
               </div>
 
               <p className="text-gray-500 mt-6 text-sm">
-                🎵 Fun Music • 💪 No Sparring • 👥 Supportive Community • 🔥 Amazing Results
+                🎵 Fun Music • 💪 No Sparring • 👥 Supportive Community • 🔥
+                Amazing Results
               </p>
             </motion.div>
 
@@ -517,13 +570,13 @@ const BoxingFitness = () => {
               {galleryMedia.length > 1 && (
                 <>
                   <button
-                    onClick={() => navigateMedia('prev')}
+                    onClick={() => navigateMedia("prev")}
                     className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-blue-600 transition-all duration-200 z-10"
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </button>
                   <button
-                    onClick={() => navigateMedia('next')}
+                    onClick={() => navigateMedia("next")}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-blue-600 transition-all duration-200 z-10"
                   >
                     <ChevronRight className="w-6 h-6" />
@@ -558,8 +611,12 @@ const BoxingFitness = () => {
 
                 {/* Media Info */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">{selectedMedia.title}</h3>
-                  <p className="text-gray-600 mb-4">{selectedMedia.description}</p>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2">
+                    {selectedMedia.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    {selectedMedia.description}
+                  </p>
                 </div>
               </motion.div>
 

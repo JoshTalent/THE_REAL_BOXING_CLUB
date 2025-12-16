@@ -1,9 +1,16 @@
-"use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle, MessageCircle } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Send,
+  CheckCircle,
+  MessageCircle,
+} from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +18,7 @@ const Contact = () => {
     email: "",
     phone: "",
     subject: "",
-    message: ""
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -19,17 +26,17 @@ const Contact = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     setIsSubmitting(false);
     setIsSubmitted(true);
     setFormData({
@@ -37,9 +44,9 @@ const Contact = () => {
       email: "",
       phone: "",
       subject: "",
-      message: ""
+      message: "",
     });
-    
+
     // Reset success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000);
   };
@@ -50,48 +57,52 @@ const Contact = () => {
       title: "Call Us",
       details: "+250 781 288 442",
       description: "Mon-Fri from 8am to 6pm",
-      link: "tel:+250788123456"
+      link: "tel:+250788123456",
     },
     {
       icon: Mail,
       title: "Email Us",
       details: "realboxingrwanda@gmail.com",
       description: "We reply within 24 hours",
-      link: "mailto:info@therealboxing.rw"
+      link: "mailto:info@therealboxing.rw",
     },
     {
       icon: MapPin,
       title: "Visit Us",
       details: "KG 123 St, Kigali",
       description: "Nyarugenge , kimisagara, Kigali City",
-      link: "https://maps.google.com/?q=KG+123+St,+Kigali"
+      link: "https://maps.google.com/?q=KG+123+St,+Kigali",
     },
     {
       icon: Clock,
       title: "Open Hours",
       details: "Mon-Sun: 6am-9pm",
       description: "Weekends: 8am-6pm",
-      link: "/schedule"
-    }
+      link: "/schedule",
+    },
   ];
 
   const faqs = [
     {
       question: "Do I need experience to join?",
-      answer: "No experience needed! We have programs for all levels, from complete beginners to advanced competitors."
+      answer:
+        "No experience needed! We have programs for all levels, from complete beginners to advanced competitors.",
     },
     {
       question: "What should I bring to my first class?",
-      answer: "Just wear comfortable workout clothes and bring water. We provide all boxing equipment for trial classes."
+      answer:
+        "Just wear comfortable workout clothes and bring water. We provide all boxing equipment for trial classes.",
     },
     {
       question: "Are there age restrictions?",
-      answer: "We welcome ages 6 and up! We have specialized programs for kids (6-12), teens (13-17), and adults."
+      answer:
+        "We welcome ages 6 and up! We have specialized programs for kids (6-12), teens (13-17), and adults.",
     },
     {
       question: "Can I try a class before signing up?",
-      answer: "Absolutely! We offer a free trial class so you can experience our training and meet the coaches first."
-    }
+      answer:
+        "Absolutely! We offer a free trial class so you can experience our training and meet the coaches first.",
+    },
   ];
 
   return (
@@ -121,7 +132,7 @@ const Contact = () => {
                   GET IN TOUCH
                 </span>
               </div>
-              
+
               <h1 className="text-6xl md:text-7xl font-black leading-tight">
                 Contact
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
@@ -130,8 +141,9 @@ const Contact = () => {
               </h1>
 
               <p className="text-xl text-gray-600 leading-relaxed">
-                Ready to start your boxing journey? We're here to answer all your questions and help you 
-                take the first step towards becoming a champion.
+                Ready to start your boxing journey? We're here to answer all
+                your questions and help you take the first step towards becoming
+                a champion.
               </p>
             </motion.div>
 
@@ -140,17 +152,23 @@ const Contact = () => {
               className="grid grid-cols-2 gap-8"
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.8 } },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { delay: 0.3, duration: 0.8 },
+                },
               }}
             >
               {[
                 { number: "24h", label: "Response Time" },
                 { number: "100%", label: "Satisfaction" },
                 { number: "50+", label: "Queries Daily" },
-                { number: "5min", label: "Quick Reply" }
+                { number: "5min", label: "Quick Reply" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-blue-600 mb-1">{stat.number}</div>
+                  <div className="text-2xl font-bold text-blue-600 mb-1">
+                    {stat.number}
+                  </div>
                   <div className="text-gray-600 text-sm">{stat.label}</div>
                 </div>
               ))}
@@ -160,13 +178,17 @@ const Contact = () => {
               className="flex flex-wrap gap-4"
               variants={{
                 hidden: { y: 30, opacity: 0 },
-                visible: { y: 0, opacity: 1, transition: { delay: 0.8, duration: 0.8 } },
+                visible: {
+                  y: 0,
+                  opacity: 1,
+                  transition: { delay: 0.8, duration: 0.8 },
+                },
               }}
             >
               <button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">
                 Book Free Trial
               </button>
-              <a 
+              <a
                 href="tel:+250788123456"
                 className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center gap-2"
               >
@@ -190,10 +212,12 @@ const Contact = () => {
               <div className="bg-white rounded-3xl p-8 shadow-2xl">
                 <div className="text-center mb-6">
                   <MessageCircle className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">Quick Contact</h3>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2">
+                    Quick Contact
+                  </h3>
                   <p className="text-gray-600">Get immediate assistance</p>
                 </div>
-                
+
                 <div className="space-y-4">
                   {contactInfo.slice(0, 2).map((item, index) => {
                     const Icon = item.icon;
@@ -208,7 +232,9 @@ const Contact = () => {
                         </div>
                         <div className="flex-1">
                           <p className="text-sm text-gray-600">{item.title}</p>
-                          <p className="font-semibold text-gray-900">{item.details}</p>
+                          <p className="font-semibold text-gray-900">
+                            {item.details}
+                          </p>
                         </div>
                       </a>
                     );
@@ -239,11 +265,14 @@ const Contact = () => {
                   </span>
                 </div>
                 <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-                  Let's Start Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">Journey</span>
+                  Let's Start Your{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+                    Journey
+                  </span>
                 </h2>
                 <p className="text-xl text-gray-600 mb-8">
-                  Whether you're curious about classes, ready to sign up, or just want to learn more, 
-                  we're excited to connect with you.
+                  Whether you're curious about classes, ready to sign up, or
+                  just want to learn more, we're excited to connect with you.
                 </p>
               </div>
 
@@ -265,9 +294,15 @@ const Contact = () => {
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-lg font-black text-gray-900 mb-1">{item.title}</h3>
-                        <p className="text-blue-600 font-semibold mb-1">{item.details}</p>
-                        <p className="text-gray-600 text-sm">{item.description}</p>
+                        <h3 className="text-lg font-black text-gray-900 mb-1">
+                          {item.title}
+                        </h3>
+                        <p className="text-blue-600 font-semibold mb-1">
+                          {item.details}
+                        </p>
+                        <p className="text-gray-600 text-sm">
+                          {item.description}
+                        </p>
                       </div>
                     </motion.a>
                   );
@@ -304,7 +339,9 @@ const Contact = () => {
             >
               <div className="flex items-center gap-3 mb-8">
                 <MessageCircle className="w-8 h-8 text-blue-600" />
-                <h3 className="text-2xl font-black text-gray-900">Send us a Message</h3>
+                <h3 className="text-2xl font-black text-gray-900">
+                  Send us a Message
+                </h3>
               </div>
 
               {isSubmitted ? (
@@ -314,9 +351,12 @@ const Contact = () => {
                   animate={{ opacity: 1, scale: 1 }}
                 >
                   <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                  <h4 className="text-2xl font-black text-gray-900 mb-2">Message Sent!</h4>
+                  <h4 className="text-2xl font-black text-gray-900 mb-2">
+                    Message Sent!
+                  </h4>
                   <p className="text-gray-600 mb-6">
-                    Thank you for reaching out. We'll get back to you within 24 hours.
+                    Thank you for reaching out. We'll get back to you within 24
+                    hours.
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
@@ -329,7 +369,9 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-gray-900 font-semibold mb-2">Full Name *</label>
+                      <label className="block text-gray-900 font-semibold mb-2">
+                        Full Name *
+                      </label>
                       <input
                         type="text"
                         name="name"
@@ -341,7 +383,9 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-900 font-semibold mb-2">Email Address *</label>
+                      <label className="block text-gray-900 font-semibold mb-2">
+                        Email Address *
+                      </label>
                       <input
                         type="email"
                         name="email"
@@ -356,7 +400,9 @@ const Contact = () => {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-gray-900 font-semibold mb-2">Phone Number</label>
+                      <label className="block text-gray-900 font-semibold mb-2">
+                        Phone Number
+                      </label>
                       <input
                         type="tel"
                         name="phone"
@@ -367,7 +413,9 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-900 font-semibold mb-2">Subject *</label>
+                      <label className="block text-gray-900 font-semibold mb-2">
+                        Subject *
+                      </label>
                       <select
                         name="subject"
                         value={formData.subject}
@@ -379,8 +427,12 @@ const Contact = () => {
                         <option value="support">Support</option>
                         <option value="membership">Membership Inquiry</option>
                         <option value="trial-class">Free Trial Class</option>
-                        <option value="private-training">Private Training</option>
-                        <option value="kids-program">Kids & Teens Program</option>
+                        <option value="private-training">
+                          Private Training
+                        </option>
+                        <option value="kids-program">
+                          Kids & Teens Program
+                        </option>
                         <option value="general">General Question</option>
                         <option value="other">Other</option>
                       </select>
@@ -388,7 +440,9 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-gray-900 font-semibold mb-2">Message *</label>
+                    <label className="block text-gray-900 font-semibold mb-2">
+                      Message *
+                    </label>
                     <textarea
                       name="message"
                       value={formData.message}
@@ -444,10 +498,14 @@ const Contact = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">Questions</span>
+              Frequently Asked{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+                Questions
+              </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Quick answers to common questions about training, memberships, and getting started.
+              Quick answers to common questions about training, memberships, and
+              getting started.
             </p>
           </motion.div>
 
@@ -506,10 +564,10 @@ const Contact = () => {
               Ready to Throw Your First Punch?
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Don't wait to start your transformation. Contact us today and discover 
-              how boxing can change your life.
+              Don't wait to start your transformation. Contact us today and
+              discover how boxing can change your life.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button className="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
                 Book Free Trial Class
@@ -522,9 +580,10 @@ const Contact = () => {
                 Call Now
               </a>
             </div>
-            
+
             <p className="text-gray-500 mt-6 text-sm">
-              📞 Immediate Assistance • 🎯 Expert Guidance • 💪 All Levels Welcome • 🕒 Flexible Scheduling
+              📞 Immediate Assistance • 🎯 Expert Guidance • 💪 All Levels
+              Welcome • 🕒 Flexible Scheduling
             </p>
           </motion.div>
         </div>

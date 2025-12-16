@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import {
@@ -30,7 +29,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { AboutImage, Heros, Anelica , frank , frank2} from "../../assets";
+import { Anelica,  frank2 } from "../../assets";
 
 const AboutUs = () => {
   const testimonials = [
@@ -114,7 +113,7 @@ const AboutUs = () => {
       instagram: "https://instagram.com/mtnrwanda",
       twitter: "https://twitter.com/mtnrwanda",
       jointAchievements: 6,
-    }
+    },
   ];
 
   const executiveTeam = [
@@ -784,8 +783,6 @@ const AboutUs = () => {
               The Real Boxing Club experience.
             </p>
           </motion.div>
-
-         
 
           {/* Team Grid - Masonry Style */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">

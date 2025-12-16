@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Navbar from "../components/Navbar";
 import Abouts from "../components/about/About";
@@ -10,7 +9,6 @@ const About = () => {
     <>
       <Navbar />
       <Abouts />
-     
     </>
   );
 };

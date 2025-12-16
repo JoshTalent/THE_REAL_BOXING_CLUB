@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -13,7 +12,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { valentin3 , Heros2, Heros3 } from "../../assets";
+import { valentin3, Heros2, Heros3 } from "../../assets";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
