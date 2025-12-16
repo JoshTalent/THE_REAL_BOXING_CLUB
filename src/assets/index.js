@@ -1,5 +1,5 @@
 
-import Heros2 from "./images/Heros2.jpg";
+import Heros2 from './images/Heros2.jpg';
 import Heros3 from "./images/Heros3.jpg";
 import Anelica from "./images/Anelica.jpg";
 import Gallery_01 from "./images/Gallery.jpg";
