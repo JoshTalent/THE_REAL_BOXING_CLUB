@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { Anelica,  Frank2 } from "../../assets";
+import { Anelica,  Frank2 ,Valentin3 } from "../../assets";
 
 const AboutUs = () => {
   const testimonials = [
@@ -326,7 +326,7 @@ const AboutUs = () => {
                 className="relative"
               >
                 <img
-                  src={Heros}
+                  src={Valentin3}
                   alt="Boxing training"
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
                 />
