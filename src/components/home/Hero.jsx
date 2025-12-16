@@ -12,7 +12,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { valentin3, Heros2, Heros3 } from "../../assets";
+import { Valentin3, Heros2, Heros3 } from "../../assets";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -20,7 +20,7 @@ const Hero = () => {
 
   const backgroundSlides = [
     {
-      image: valentin3,
+      image: Valentin3,
       title: "Championship Training",
       subtitle: "Elite coaching for serious fighters",
     },

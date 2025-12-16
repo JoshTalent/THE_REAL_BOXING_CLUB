@@ -28,11 +28,11 @@ import {
 import {
   Gallery_01,
   Coach,
-  valentin4,
-  frank3,
-  valentin3,
-  valentin,
-  frank2,
+  Valentin4,
+  Frank3,
+  Valentin3,
+  Valentin,
+  Frank2,
 } from "../assets";
 
 const Gallery = () => {
@@ -80,8 +80,8 @@ const Gallery = () => {
       id: 1,
       type: "image",
       category: "class-action", // Added category
-      src: frank2,
-      thumbnail: frank2,
+      src: Frank2,
+      thumbnail: Frank2,
       title: "Morning Boxing Fundamentals",
       description:
         "Members perfecting their technique in our 6 AM fundamentals class",
@@ -96,8 +96,8 @@ const Gallery = () => {
       id: 2,
       type: "video",
       category: "class-action", // Added category
-      src: valentin,
-      thumbnail: valentin,
+      src: Valentin,
+      thumbnail: Valentin,
       title: "High-Energy Fitness Class",
       description: "Boxing for Fitness class in full swing with Coach Alice",
       date: "2024-01-10",
@@ -141,8 +141,8 @@ const Gallery = () => {
       id: 5, // FIXED: Changed from 3 to 5 for unique ID
       type: "image",
       category: "championship", // Added category
-      src: valentin3,
-      thumbnail: valentin3,
+      src: Valentin3,
+      thumbnail: Valentin3,
       title: "Our Champion at IBA Championships",
       description:
         "Champions creator, discipline teacher and technique facilitator",
@@ -156,8 +156,8 @@ const Gallery = () => {
       id: 6, // FIXED: Changed from 3 to 6 for unique ID
       type: "image",
       category: "profile", // Added category
-      src: valentin4,
-      thumbnail: valentin4,
+      src: Valentin4,
+      thumbnail: Valentin4,
       title: "Valentin The Cap",
       description:
         "Champions creator, discipline teacher and technique facilitator",
@@ -171,8 +171,8 @@ const Gallery = () => {
       id: 7, // FIXED: Changed from 3 to 7 for unique ID
       type: "image",
       category: "profile", // Added category
-      src: frank3,
-      thumbnail: frank3,
+      src: Frank3,
+      thumbnail: Frank3,
       title: "Frank The Beast",
       description:
         "Champions creator, discipline teacher and technique facilitator",

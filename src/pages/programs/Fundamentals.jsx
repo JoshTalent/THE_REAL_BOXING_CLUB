@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { boxing } from "../../assets";
+import { Boxing } from "../../assets";
 
 const BoxingFundamentals = () => {
   const features = [
@@ -184,7 +184,7 @@ const BoxingFundamentals = () => {
           <div className="relative h-full flex items-center justify-center p-12">
             <div className="w-full max-w-lg">
               <motion.img
-                src={boxing}
+                src={Boxing}
                 alt="Boxing Training"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl mb-8"
                 initial={{ opacity: 0, scale: 0.9 }}

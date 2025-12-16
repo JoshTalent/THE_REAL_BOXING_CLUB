@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { Anelica,  frank2 } from "../../assets";
+import { Anelica,  Frank2 } from "../../assets";
 
 const AboutUs = () => {
   const testimonials = [
@@ -269,7 +269,7 @@ const AboutUs = () => {
         {/* Right Side - Full Height Image */}
         <div className="flex-1 relative">
           <motion.img
-            src={frank2}
+            src={Frank2}
             alt="Boxing training"
             className="w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.1 }}

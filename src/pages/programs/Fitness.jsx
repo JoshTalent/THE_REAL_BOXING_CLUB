@@ -15,7 +15,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import { frank3, frank2 } from "../../assets";
+import { Frank3, Frank2 } from "../../assets";
 
 const BoxingFitness = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
@@ -100,21 +100,21 @@ const BoxingFitness = () => {
     {
       id: 1,
       type: "image",
-      src: frank2,
+      src: Frank2,
       title: "Group Energy",
       desc: "High-energy classes with motivating music",
     },
     {
       id: 2,
       type: "image",
-      src: frank3,
+      src: Frank3,
       title: "Non-Intimidating",
       desc: "Welcoming environment for all fitness levels",
     },
     {
       id: 3,
       type: "image",
-      src: frank2,
+      src: Frank2,
       title: "Fun Atmosphere",
       desc: "Enjoyable workouts that feel like play",
     },
@@ -122,7 +122,7 @@ const BoxingFitness = () => {
       id: 4,
       type: "video",
       src: "https://player.vimeo.com/video/824804225?h=6c8d5d5a5f",
-      thumbnail: frank3,
+      thumbnail: Frank3,
       title: "Fitness Class Preview",
       desc: "Experience the energy of our boxing fitness sessions",
     },
@@ -251,7 +251,7 @@ const BoxingFitness = () => {
               transition={{ duration: 1 }}
             >
               <img
-                src={frank3}
+                src={Frank3}
                 alt="Group fitness class with energetic music"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />

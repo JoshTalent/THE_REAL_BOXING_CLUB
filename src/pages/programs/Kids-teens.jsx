@@ -18,7 +18,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import { frank2, frank3, valentin2, Anelica, valentin3 } from "../../assets";
+import { Frank2, Frank3, Valentin2, Anelica, Valentin3 } from "../../assets";
 
 const KidsTeensBoxing = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
@@ -136,7 +136,7 @@ const KidsTeensBoxing = () => {
     {
       id: 1,
       type: "image",
-      src: frank2,
+      src: Frank2,
       title: "Frank KALISA ",
       description:
         "Young champions learning proper technique in a safe environment",
@@ -153,7 +153,7 @@ const KidsTeensBoxing = () => {
     {
       id: 3,
       type: "image",
-      src: valentin2,
+      src: Valentin2,
       title: "Valentin NTABANGANYIMANA",
       description: "Certified coaches ensuring proper technique and safety",
       category: "coaching",
@@ -637,7 +637,7 @@ const KidsTeensBoxing = () => {
               transition={{ duration: 0.8 }}
             >
               <img
-                src={valentin3}
+                src={Valentin3}
                 alt="Young boxer training"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />
