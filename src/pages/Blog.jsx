@@ -42,7 +42,7 @@ const Blog = () => {
       author: "Alice Kamali",
       date: "2024-01-20",
       image:
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1170&auto=format&fit=crop",
+        "https://i.postimg.cc/CK4W5TX5/frank2.jpg",
       featured: true,
       slug: "boxing-weight-loss-benefits",
     },
@@ -56,7 +56,7 @@ const Blog = () => {
       author: "Olivier The Coach",
       date: "2024-01-18",
       image:
-        "https://images.unsplash.com/photo-1589984662646-e7b2e5e3b4e6?q=80&w=1170&auto=format&fit=crop",
+        "https://i.postimg.cc/268gB9Nn/valentin3.jpg",
       featured: true,
       slug: "how-to-wrap-hands",
     },
@@ -70,7 +70,7 @@ const Blog = () => {
       author: "Sophie Niyonsaba",
       date: "2024-01-15",
       image:
-        "https://images.unsplash.com/photo-1490645935967-10de6b170d1b?q=80&w=1170&auto=format&fit=crop",
+        "https://i.postimg.cc/RFV2npxF/valentin2.jpg",
       featured: false,
       slug: "nutrition-tips-for-boxers",
     },
@@ -84,7 +84,7 @@ const Blog = () => {
       author: "Jean Claude",
       date: "2024-01-12",
       image:
-        "https://images.unsplash.com/photo-1534367507877-0edd93bd013b?q=80&w=1170&auto=format&fit=crop",
+        "https://i.postimg.cc/RFV2npxf/valentin4.jpg",
       featured: true,
       slug: "marie-success-story",
     },
@@ -98,7 +98,7 @@ const Blog = () => {
       author: "David Rodriguez",
       date: "2024-01-10",
       image:
-        "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1170&auto=format&fit=crop",
+        "https://i.postimg.cc/7h5cKC6w/Heros3.jpg",
       featured: false,
       slug: "first-boxing-class-guide",
     },
@@ -112,7 +112,7 @@ const Blog = () => {
       author: "Alice Kamali",
       date: "2024-01-08",
       image:
-        "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1170&auto=format&fit=crop",
+        "https://i.postimg.cc/vBHC62wH/valentin.jpg",
       featured: false,
       slug: "mental-benefits-of-boxing",
     },
@@ -126,7 +126,7 @@ const Blog = () => {
       author: "Olivier The Coach",
       date: "2024-01-05",
       image:
-        "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1170&auto=format&fit=crop",
+        "https://i.postimg.cc/3wZPN5V3/frank.jpg",
       featured: false,
       slug: "beginner-boxing-equipment",
     },
@@ -140,7 +140,7 @@ const Blog = () => {
       author: "Sophie Niyonsaba",
       date: "2024-01-03",
       image:
-        "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1220&auto=format&fit=crop",
+        "https://i.postimg.cc/fL2p77Mx/coach.jpg",
       featured: false,
       slug: "boxing-recovery-strategies",
     },

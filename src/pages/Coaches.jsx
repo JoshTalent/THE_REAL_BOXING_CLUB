@@ -16,8 +16,6 @@ import {
   ArrowRight,
   MapPin,
 } from "lucide-react";
-import { Josh, Coach } from "../assets";
-
 const coaches = [
   {
     name: "Olivier The Coach",
@@ -28,7 +26,7 @@ const coaches = [
       "Fight Preparation",
       "Advanced Techniques",
     ],
-    image: Coach,
+    image: "https://i.postimg.cc/fL2p77Mx/coach.jpg",
     credentials: [
       "Former National Champion (2012-2015)",
       "Level 4 Certified Boxing Coach",
@@ -58,7 +56,7 @@ const coaches = [
       "Cardio Conditioning",
       "Strength Training",
     ],
-    image: Josh,
+    image: "https://i.postimg.cc/SKGwRF3Y/josh.jpg",
     credentials: [
       "Certified Personal Trainer (NASM)",
       "Sports Nutrition Specialist",

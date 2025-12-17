@@ -29,8 +29,6 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { Anelica,  Frank2 ,Valentin3 } from "../../assets";
-
 const AboutUs = () => {
   const testimonials = [
     {
@@ -269,7 +267,7 @@ const AboutUs = () => {
         {/* Right Side - Full Height Image */}
         <div className="flex-1 relative">
           <motion.img
-            src={Frank2}
+            src="https://i.postimg.cc/3wZPN5V3/frank.jpg"
             alt="Boxing training"
             className="w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.1 }}
@@ -326,7 +324,7 @@ const AboutUs = () => {
                 className="relative"
               >
                 <img
-                  src={Valentin3}
+                  src="https://i.postimg.cc/268gB9Nn/valentin3.jpg"
                   alt="Boxing training"
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
                 />
@@ -358,7 +356,7 @@ const AboutUs = () => {
                 className="lg:order-1"
               >
                 <img
-                  src={Anelica}
+                  src="https://i.postimg.cc/7h5cKC6w/Heros3.jpg"
                   alt="Boxing philosophy"
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
                 />

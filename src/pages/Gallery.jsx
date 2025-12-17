@@ -25,15 +25,6 @@ import {
   BookOpen,
 } from "lucide-react";
 
-import {
-  Gallery_01,
-  Coach,
-  Valentin4,
-  Frank3,
-  Valentin3,
-  Valentin,
-  Frank2,
-} from "../assets";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -80,8 +71,8 @@ const Gallery = () => {
       id: 1,
       type: "image",
       category: "class-action", // Added category
-      src: Frank2,
-      thumbnail: Frank2,
+      src: "https://i.postimg.cc/3wZPN5V3/frank.jpg",
+      thumbnail: "https://i.postimg.cc/3wZPN5V3/frank.jpg",
       title: "Morning Boxing Fundamentals",
       description:
         "Members perfecting their technique in our 6 AM fundamentals class",
@@ -96,8 +87,8 @@ const Gallery = () => {
       id: 2,
       type: "video",
       category: "class-action", // Added category
-      src: Valentin,
-      thumbnail: Valentin,
+      src: "https://i.postimg.cc/vBHC62wH/valentin.jpg",
+      thumbnail: "https://i.postimg.cc/vBHC62wH/valentin.jpg",
       title: "High-Energy Fitness Class",
       description: "Boxing for Fitness class in full swing with Coach Alice",
       date: "2024-01-10",
@@ -112,8 +103,8 @@ const Gallery = () => {
       id: 3,
       type: "image",
       category: "class-action", // Added category
-      src: Gallery_01,
-      thumbnail: Gallery_01,
+      src: "https://i.postimg.cc/RFV2npxF/valentin2.jpg",
+      thumbnail: "https://i.postimg.cc/RFV2npxF/valentin2.jpg",
       title: "Kids Boxing Session",
       description: "Young champions learning discipline and technique",
       date: "2024-01-12",
@@ -126,8 +117,8 @@ const Gallery = () => {
       id: 4, // FIXED: Changed from 3 to 4 for unique ID
       type: "image",
       category: "coach", // Added category
-      src: Coach,
-      thumbnail: Coach,
+      src: "https://i.postimg.cc/fL2p77Mx/coach.jpg",
+      thumbnail: "https://i.postimg.cc/fL2p77Mx/coach.jpg",
       title: "OUR COACH",
       description:
         "Champions creator, discipline teacher and technique facilitator",
@@ -141,8 +132,8 @@ const Gallery = () => {
       id: 5, // FIXED: Changed from 3 to 5 for unique ID
       type: "image",
       category: "championship", // Added category
-      src: Valentin3,
-      thumbnail: Valentin3,
+      src:"https://i.postimg.cc/268gB9Nn/valentin3.jpg",
+      thumbnail: "https://i.postimg.cc/268gB9Nn/valentin3.jpg",
       title: "Our Champion at IBA Championships",
       description:
         "Champions creator, discipline teacher and technique facilitator",
@@ -156,8 +147,8 @@ const Gallery = () => {
       id: 6, // FIXED: Changed from 3 to 6 for unique ID
       type: "image",
       category: "profile", // Added category
-      src: Valentin4,
-      thumbnail: Valentin4,
+      src: "https://i.postimg.cc/RFV2npxf/valentin4.jpg",
+      thumbnail: "https://i.postimg.cc/RFV2npxf/valentin4.jpg",
       title: "Valentin The Cap",
       description:
         "Champions creator, discipline teacher and technique facilitator",
@@ -171,8 +162,8 @@ const Gallery = () => {
       id: 7, // FIXED: Changed from 3 to 7 for unique ID
       type: "image",
       category: "profile", // Added category
-      src: Frank3,
-      thumbnail: Frank3,
+      src: "https://i.postimg.cc/CK4W5TX5/frank2.jpg",
+      thumbnail: "https://i.postimg.cc/CK4W5TX5/frank2.jpg",
       title: "Frank The Beast",
       description:
         "Champions creator, discipline teacher and technique facilitator",

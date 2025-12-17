@@ -16,8 +16,6 @@ import {
   Camera
 } from "lucide-react";
 
-import { Logo } from "../assets";
-
 const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState(null);
@@ -121,7 +119,7 @@ const Navbar = () => {
               className="relative"
             >
               <div className="w-10 h-10 lg:w-12 lg:h-12  flex items-center justify-center ">
-               <img src={Logo} alt="" srcset="" />
+               <img src="https://i.postimg.cc/7PfX5GWk/logo.png" alt="" srcset="" />
               </div>
             </motion.div>
             <div className="flex flex-col">

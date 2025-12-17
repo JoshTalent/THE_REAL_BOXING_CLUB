@@ -15,8 +15,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import { Frank3, Frank2 } from "../../assets";
-
 const BoxingFitness = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -100,21 +98,21 @@ const BoxingFitness = () => {
     {
       id: 1,
       type: "image",
-      src: Frank2,
+      src: "https://i.postimg.cc/3wZPN5V3/frank.jpg",
       title: "Group Energy",
       desc: "High-energy classes with motivating music",
     },
     {
       id: 2,
       type: "image",
-      src: Frank3,
+      src: "https://i.postimg.cc/vBHC62wH/valentin.jpg",
       title: "Non-Intimidating",
       desc: "Welcoming environment for all fitness levels",
     },
     {
       id: 3,
       type: "image",
-      src: Frank2,
+      src: "https://i.postimg.cc/CK4W5TX5/frank2.jpg",
       title: "Fun Atmosphere",
       desc: "Enjoyable workouts that feel like play",
     },
@@ -122,7 +120,7 @@ const BoxingFitness = () => {
       id: 4,
       type: "video",
       src: "https://player.vimeo.com/video/824804225?h=6c8d5d5a5f",
-      thumbnail: Frank3,
+      thumbnail: "https://i.postimg.cc/RFV2npxF/valentin2.jpg",
       title: "Fitness Class Preview",
       desc: "Experience the energy of our boxing fitness sessions",
     },
@@ -251,7 +249,7 @@ const BoxingFitness = () => {
               transition={{ duration: 1 }}
             >
               <img
-                src={Frank3}
+                src="https://i.postimg.cc/CK4W5TX5/frank2.jpg"
                 alt="Group fitness class with energetic music"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />
@@ -534,7 +532,7 @@ const BoxingFitness = () => {
               transition={{ duration: 0.8 }}
             >
               <img
-                src="https://plus.unsplash.com/premium_photo-1672791843132-cea1902ad66b?q=80&w=870&auto=format&fit=crop"
+                src="https://i.postimg.cc/268gB9Nn/valentin3.jpg"
                 alt="Fitness class community"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />

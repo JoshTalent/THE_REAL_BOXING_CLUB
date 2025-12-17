@@ -17,9 +17,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-
-import { Frank2, Frank3, Valentin2, Anelica, Valentin3 } from "../../assets";
-
 const KidsTeensBoxing = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -136,7 +133,7 @@ const KidsTeensBoxing = () => {
     {
       id: 1,
       type: "image",
-      src: Frank2,
+      src: "https://i.postimg.cc/3wZPN5V3/frank.jpg",
       title: "Frank KALISA ",
       description:
         "Young champions learning proper technique in a safe environment",
@@ -145,7 +142,7 @@ const KidsTeensBoxing = () => {
     {
       id: 2,
       type: "image",
-      src: Anelica,
+      src: "https://i.postimg.cc/7h5cKC6w/Heros3.jpg",
       title: "Anelica NSABIMANA",
       description: "Engaging games that teach coordination and boxing basics",
       category: "activities",
@@ -153,7 +150,7 @@ const KidsTeensBoxing = () => {
     {
       id: 3,
       type: "image",
-      src: Valentin2,
+      src:"https://i.postimg.cc/RFV2npxF/valentin2.jpg",
       title: "Valentin NTABANGANYIMANA",
       description: "Certified coaches ensuring proper technique and safety",
       category: "coaching",
@@ -282,7 +279,7 @@ const KidsTeensBoxing = () => {
               transition={{ duration: 1 }}
             >
               <img
-                src="https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?q=80&w=2070&auto=format&fit=crop"
+                src="https://i.postimg.cc/7h5cKC6w/Heros3.jpg"
                 alt="Kids enjoying boxing training"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />
@@ -637,7 +634,7 @@ const KidsTeensBoxing = () => {
               transition={{ duration: 0.8 }}
             >
               <img
-                src={Valentin3}
+                src="https://i.postimg.cc/268gB9Nn/valentin3.jpg"
                 alt="Young boxer training"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />

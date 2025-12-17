@@ -22,8 +22,6 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { Boxing } from "../../assets";
-
 const BoxingFundamentals = () => {
   const features = [
     { icon: Shield, text: "Self-Defense Skills", desc: "Learn practical self-defense techniques" },
@@ -184,7 +182,7 @@ const BoxingFundamentals = () => {
           <div className="relative h-full flex items-center justify-center p-12">
             <div className="w-full max-w-lg">
               <motion.img
-                src={Boxing}
+                src="https://i.postimg.cc/7h5cKC6w/Heros3.jpg"
                 alt="Boxing Training"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl mb-8"
                 initial={{ opacity: 0, scale: 0.9 }}

@@ -12,25 +12,23 @@ import {
   MapPin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Valentin3, Heros2, Heros3 } from "../../assets";
-
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const backgroundSlides = [
     {
-      image: Valentin3,
+      image: "https://i.postimg.cc/268gB9Nn/valentin3.jpg",
       title: "Championship Training",
       subtitle: "Elite coaching for serious fighters",
     },
     {
-      image: Heros2,
+      image: "https://i.postimg.cc/SsT3LLmf/boxing.jpg",
       title: "State-of-the-Art Facility",
       subtitle: "Professional equipment & environment",
     },
     {
-      image: Heros3,
+      image: "https://i.postimg.cc/7h5cKC6w/Heros3.jpg",
       title: "Proven Results",
       subtitle: "Track record of creating champions",
     },
