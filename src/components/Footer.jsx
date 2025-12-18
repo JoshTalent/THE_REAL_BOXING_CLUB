@@ -44,11 +44,11 @@ const Footer = () => {
     {
       title: "SUPPORT",
       links: [
-        { name: "Contact Us", to: "/contact" },
-        { name: "FAQs", to: "/faqs" },
-        { name: "Membership", to: "/membership" },
-        { name: "Privacy Policy", to: "/privacy" },
-        { name: "Terms of Service", to: "/terms" },
+        { name: "Contact Us", to: "/" },
+        { name: "FAQs", to: "/" },
+        { name: "Membership", to: "/" },
+        { name: "Privacy Policy", to: "/" },
+        { name: "Terms of Service", to: "/" },
       ]
     }
   ];
@@ -61,12 +61,12 @@ const Footer = () => {
     },
     {
       icon: Phone,
-      text: "+250 788 123 456",
+      text: "+250 781 288 442",
       subtext: "Mon-Fri 5AM-10PM"
     },
     {
       icon: Mail,
-      text: "info@realboxingclub.com",
+      text: "realboxingrwanda@gmail.com",
       subtext: "We reply within 24h"
     },
     {

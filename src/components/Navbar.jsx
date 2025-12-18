@@ -24,14 +24,35 @@ const Navbar = () => {
   const location = useLocation();
   const mobileMenuRef = useRef(null);
 
-  // Scroll effect for navbar
+  // FIXED: Scroll effect for navbar - works on all pages
+  const updateScrollState = () => {
+    setIsScrolled(window.scrollY > 50);
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    // Initial check
+    updateScrollState();
+    
+    // Listen for scroll
+    window.addEventListener("scroll", updateScrollState);
+    
+    return () => {
+      window.removeEventListener("scroll", updateScrollState);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // FIXED: Check scroll when location changes
+  useEffect(() => {
+    // Check scroll immediately
+    updateScrollState();
+    
+    // Also check after a small delay to ensure page is loaded
+    const timer = setTimeout(() => {
+      updateScrollState();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [location]);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -103,93 +124,96 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${
-      isScrolled 
-        ? "bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-blue-500/20" 
-        : "bg-transparent"
-    }`}>
-   
-      {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 lg:h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="relative"
-            >
-              <div className="w-10 h-10 lg:w-12 lg:h-12  flex items-center justify-center ">
-               <img src="https://i.postimg.cc/7PfX5GWk/logo.png" alt="" srcset="" />
+    <>
+      {/* Main Navbar - FIXED: Added proper z-index */}
+      <nav className={`fixed w-full z-[9999] transition-all duration-500 ${
+        isScrolled 
+          ? "bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-blue-500/20" 
+          : "bg-transparent"
+      }`}>
+     
+        {/* Main Navbar Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 lg:h-20">
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="relative"
+              >
+                <div className="w-10 h-10 lg:w-12 lg:h-12  flex items-center justify-center ">
+                 <img src="https://i.postimg.cc/7PfX5GWk/logo.png" alt="" srcset="" />
+                </div>
+              </motion.div>
+              <div className="flex flex-col">
+                <span className="text-lg lg:text-xl font-black tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                THE REAL BOXING
+                </span>
+                <span className="text-xs text-blue-400 font-semibold tracking-wider">
+                  CHAMPIONSHIP CLUB
+                </span>
               </div>
-            </motion.div>
-            <div className="flex flex-col">
-              <span className="text-lg lg:text-xl font-black tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              THE REAL BOXING
-              </span>
-              <span className="text-xs text-blue-400 font-semibold tracking-wider">
-                CHAMPIONSHIP CLUB
-              </span>
-            </div>
-          </Link>
+            </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-            <NavLink to="/" isActive={isActiveLink("/")}>
-              HOME
-            </NavLink>
-            <NavLink to="/about" isActive={isActiveLink("/about")}>
-              ABOUT
-            </NavLink>
-            <NavLink to="/gallery" isActive={isActiveLink("/gallery")}>
-              GALLERY
-            </NavLink>
-            <NavLink to="/coaches" isActive={isActiveLink("/coaches")}>
-              COACHES
-            </NavLink>
-            <NavLink to="/blog" isActive={isActiveLink("/blog")}>
-              BLOG
-            </NavLink>
-            <EnhancedDropdown 
-              title="PROGRAMS" 
-              items={programsMenu} 
-              isActive={isActiveParent(['/programs'])}
-              isOpen={isDropdownOpen}
-              setIsOpen={setIsDropdownOpen}
-            />
-            
-        
-            <div className="flex items-center gap-3 ml-4 pl-4 border-l border-slate-700">
-              <Link to="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 rounded-lg border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300 font-semibold text-sm"
-                >
-                  Contact
-                </motion.button>
-              </Link>
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+              <NavLink to="/" isActive={isActiveLink("/")}>
+                HOME
+              </NavLink>
+              <NavLink to="/about" isActive={isActiveLink("/about")}>
+                ABOUT
+              </NavLink>
+              <NavLink to="/gallery" isActive={isActiveLink("/gallery")}>
+                GALLERY
+              </NavLink>
+              <NavLink to="/coaches" isActive={isActiveLink("/coaches")}>
+                COACHES
+              </NavLink>
+              <NavLink to="/blog" isActive={isActiveLink("/blog")}>
+                BLOG
+              </NavLink>
+              <EnhancedDropdown 
+                title="PROGRAMS" 
+                items={programsMenu} 
+                isActive={isActiveParent(['/programs'])}
+                isOpen={isDropdownOpen}
+                setIsOpen={setIsDropdownOpen}
+              />
+              
+          
+              <div className="flex items-center gap-3 ml-4 pl-4 border-l border-slate-700">
+                <Link to="/contact">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 rounded-lg border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300 font-semibold text-sm"
+                  >
+                    Contact
+                  </motion.button>
+                </Link>
+              </div>
             </div>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              data-menu-button
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="lg:hidden w-10 h-10 rounded-lg bg-gradient-to-r from-blue-600/20 to-blue-700/20 border border-blue-500/30 flex items-center justify-center text-white backdrop-blur-sm"
+              aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+            >
+              {isMobileOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </motion.button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            data-menu-button
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="lg:hidden w-10 h-10 rounded-lg bg-gradient-to-r from-blue-600/20 to-blue-700/20 border border-blue-500/30 flex items-center justify-center text-white backdrop-blur-sm"
-            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-          >
-            {isMobileOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </motion.button>
         </div>
-      </div>
+      </nav>
 
-      {/* Enhanced Mobile Drawer */}
+      {/* Enhanced Mobile Drawer - FIXED: Added higher z-index and isolated stacking context */}
       <AnimatePresence>
         {isMobileOpen && (
           <>
@@ -198,7 +222,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998] lg:hidden"
               onClick={() => setIsMobileOpen(false)}
             />
 
@@ -213,7 +237,7 @@ const Navbar = () => {
                 damping: 30, 
                 stiffness: 300 
               }}
-              className="fixed top-0 right-0 w-full max-w-sm h-full bg-gradient-to-b from-slate-900 to-black border-l border-blue-500/20 shadow-2xl flex flex-col z-50 overflow-y-auto"
+              className="fixed top-0 right-0 w-full max-w-sm h-full bg-gradient-to-b from-slate-900 to-black border-l border-blue-500/20 shadow-2xl flex flex-col z-[9999] overflow-y-auto isolate"
             >
               {/* Drawer Header */}
               <div className="flex justify-between items-center p-6 border-b border-slate-800 bg-gradient-to-r from-blue-600/10 to-blue-700/10 sticky top-0 bg-slate-900">
@@ -282,7 +306,7 @@ const Navbar = () => {
          
                 {/* Mobile CTA Buttons */}
                 <div className="pt-6 space-y-3">
-      
+        
                   <Link to="/contact" onClick={() => setIsMobileOpen(false)}>
                     <motion.button
                       whileHover={{ scale: 1.02 }}
@@ -327,7 +351,7 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 
@@ -383,7 +407,7 @@ const EnhancedDropdown = ({ title, items, isActive, isOpen, setIsOpen, isSimple 
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute top-full left-0 mt-2 bg-slate-900/95 backdrop-blur-xl rounded-xl shadow-2xl border border-blue-500/20 p-3 w-64 z-50"
+            className="absolute top-full left-0 mt-2 bg-slate-900/95 backdrop-blur-xl rounded-xl shadow-2xl border border-blue-500/20 p-3 w-64 z-[10000]"
           >
             <div className="space-y-1">
               {items.map((item, idx) => (
