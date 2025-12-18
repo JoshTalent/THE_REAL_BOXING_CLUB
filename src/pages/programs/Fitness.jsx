@@ -112,7 +112,7 @@ const BoxingFitness = () => {
     {
       id: 3,
       type: "image",
-      src: "https://i.postimg.cc/CK4W5TX5/frank2.jpg",
+      src: "https://i.postimg.cc/KjVVcr0s/IMG_20241222_WA0016.jpg",
       title: "Fun Atmosphere",
       desc: "Enjoyable workouts that feel like play",
     },
@@ -249,7 +249,7 @@ const BoxingFitness = () => {
               transition={{ duration: 1 }}
             >
               <img
-                src="https://i.postimg.cc/CK4W5TX5/frank2.jpg"
+                src="https://i.postimg.cc/9XNsBCc9/IMG_20250521_WA0008.jpg"
                 alt="Group fitness class with energetic music"
                 className="w-full h-96 object-cover rounded-3xl shadow-2xl"
               />

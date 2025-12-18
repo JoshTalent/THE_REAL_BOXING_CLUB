@@ -356,7 +356,7 @@ const AboutUs = () => {
                 className="lg:order-1"
               >
                 <img
-                  src="https://i.postimg.cc/7h5cKC6w/Heros3.jpg"
+                  src="https://i.postimg.cc/KcsC5xmP/IMG_20250616_152058.jpg"
                   alt="Boxing philosophy"
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
                 />
