@@ -11,6 +11,7 @@ import Fundamentals from "./pages/programs/Fundamentals";
 import Kids_teens from "./pages/programs/Kids-teens";
 import Blog from "./pages/Blog";
 import Coaches from "./pages/Coaches";
+import Donate from "./pages/Donate";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/programs/kids-teens" element={<Kids_teens />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/coaches" element={<Coaches />} />
+        <Route path="/donate" element={<Donate />} />
       </Routes>
     </>
   );

@@ -1,435 +1,336 @@
-
-import React from "react";
-import { motion } from "framer-motion";
-import { 
-  Shield, 
-  Target, 
-  Users, 
-  Clock, 
-  Dumbbell, 
-  Award,
-  PlayCircle,
-  Star,
-  CheckCircle2,
-  Sparkles,
-  ArrowRight,
-  Medal,
-  GraduationCap,
-  Activity,
-  Calendar,
-  MapPin,
-  Phone
-} from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { Target, Shield, Brain, Crosshair, Trophy, Users, ArrowRight, X, ChevronLeft, ChevronRight, CheckCircle } from "lucide-react";
+
 const BoxingFundamentals = () => {
-  const features = [
-    { icon: Shield, text: "Self-Defense Skills", desc: "Learn practical self-defense techniques" },
-    { icon: Target, text: "Precision Technique", desc: "Master proper form and accuracy" },
-    { icon: Users, text: "Supportive Community", desc: "Train with like-minded beginners" },
-    { icon: Clock, text: "Time-Efficient Workouts", desc: "45-60 minute focused sessions" },
-    { icon: Dumbbell, text: "Full-Body Conditioning", desc: "Complete physical transformation" },
-    { icon: Award, text: "Certified Coaches", desc: "Learn from experienced professionals" }
+  const [selected, setSelected] = useState(null);
+  const [idx, setIdx] = useState(0);
+
+  const foundations = [
+    { icon: Crosshair, title: "Proper Stance & Footwork", desc: "Master the foundation of boxing with correct stance, balance, and foot movement patterns that set you up for success." },
+    { icon: Shield, title: "Defensive Techniques", desc: "Learn blocking, slipping, rolling, and parrying to protect yourself while creating counter-punch opportunities." },
+    { icon: Target, title: "Punching Mechanics", desc: "Develop power and precision in jabs, crosses, hooks, and uppercuts with proper body mechanics." },
+    { icon: Brain, title: "Ring IQ & Strategy", desc: "Understand distance management, timing, feinting, and combo construction to outsmart opponents." },
   ];
 
-  const curriculumSections = [
-    {
-      title: "Foundation & Form",
-      icon: GraduationCap,
-      items: ["Proper Boxing Stance", "Defensive Guard Positions", "Basic Footwork & Movement", "Balance & Coordination"],
-      duration: "Weeks 1-2",
-      color: "from-blue-500 to-blue-600"
-    },
-    {
-      title: "Core Techniques",
-      icon: Target,
-      items: ["Jab & Cross Mastery", "Hook & Uppercut Fundamentals", "Punch Combinations", "Timing & Rhythm"],
-      duration: "Weeks 3-4",
-      color: "from-green-500 to-green-600"
-    },
-    {
-      title: "Defense & Strategy",
-      icon: Shield,
-      items: ["Blocking & Parrying", "Head Movement & Evasion", "Distance Management", "Counter-Attacking"],
-      duration: "Weeks 5-6",
-      color: "from-orange-500 to-orange-600"
-    },
-    {
-      title: "Conditioning",
-      icon: Activity,
-      items: ["Boxing Endurance", "Core Strength Development", "Speed & Agility", "Recovery Techniques"],
-      duration: "Weeks 7-8",
-      color: "from-purple-500 to-purple-600"
-    }
+  const curriculum = [
+    { level: "Beginner", weeks: "1-4", topics: ["Stance & balance fundamentals", "Basic footwork & pivots", "Jab & cross mechanics", "Simple defensive drills", "Heavy bag introduction"], color: "from-green-500 to-emerald-600" },
+    { level: "Intermediate", weeks: "5-8", topics: ["Advanced combinations", "Head movement & counters", "Pad work & timing drills", "Sparring fundamentals", "Conditioning circuits"], color: "from-blue-500 to-purple-600" },
+    { level: "Advanced", weeks: "9-12", topics: ["Fight strategy & game planning", "Advanced ring craft", "Speed & power optimization", "Competition preparation", "Mental conditioning"], color: "from-purple-500 to-pink-600" },
   ];
 
-  const stats = [
-    { number: "500+", label: "Beginners Trained", icon: Users },
-    { number: "95%", label: "Success Rate", icon: Award },
-    { number: "0", label: "Experience Needed", icon: Star },
-    { number: "8", label: "Week Program", icon: Clock }
+  const gallery = [
+    { id: 1, src: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800", title: "Pad Work", desc: "Perfecting technique with focus mitts" },
+    { id: 2, src: "https://images.unsplash.com/photo-1521806466-ab2b6d7c50bf?w=800", title: "Bag Training", desc: "Developing power and combinations" },
+    { id: 3, src: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800", title: "Footwork Drills", desc: "Building agile movement patterns" },
   ];
+
+  const open = (item, i) => { setSelected(item); setIdx(i); };
+  const close = () => setSelected(null);
+  const nav = (d) => { const n = (idx + d + gallery.length) % gallery.length; setIdx(n); setSelected(gallery[n]); };
 
   return (
     <>
       <Navbar />
 
-      {/* NEW LAYOUT: Split Screen Hero */}
-      <section className="min-h-screen bg-white flex flex-col lg:flex-row">
-        {/* Left Side - Content */}
-        <div className="flex-1 flex items-center justify-center p-12 bg-gradient-to-br from-blue-50 to-white">
-          <motion.div
-            className="max-w-2xl space-y-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+      <section className="relative min-h-[70vh] bg-black flex items-center pt-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.1),transparent_60%)]" />
+        <div className="relative z-10 container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[55vh]">
             <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               className="space-y-6"
-              variants={{
-                hidden: { x: -50, opacity: 0 },
-                visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
-              }}
             >
-              <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-100 rounded-full">
-                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">
-                  Beginner-Friendly Program
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
+                <span className="text-sm font-medium text-white/90">
+                  ALL SKILL LEVELS • COMPETITIVE & RECREATIONAL
                 </span>
               </div>
-              
-              <h1 className="text-6xl md:text-7xl font-black leading-tight">
-                Boxing
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+              <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight">
+                Master the
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
                   Fundamentals
                 </span>
               </h1>
-
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Master the Art of Boxing from <span className="text-blue-600 font-semibold">Zero to Confident</span>
+              <p className="text-lg text-white/60 leading-relaxed">
+                A comprehensive boxing program that builds your foundation from
+                the ground up. Whether you are aiming for the ring or personal
+                mastery, our structured curriculum ensures real progress.
               </p>
-            </motion.div>
-
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Build a rock-solid foundation in boxing technique, conditioning, and mental discipline. 
-              Perfect for absolute beginners seeking confidence, fitness, and practical self-defense skills 
-              in a supportive, non-intimidating environment.
-            </p>
-
-            {/* CTA Buttons */}
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <motion.a
-                href="/booking"
-                className="group relative px-8 py-4 bg-blue-600 rounded-xl font-semibold text-white text-center overflow-hidden"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="relative flex items-center justify-center gap-3">
-                  Start Free Trial
-                  <PlayCircle className="w-5 h-5" />
-                </span>
-              </motion.a>
-              
-              <motion.a
-                href="#curriculum"
-                className="group px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-xl font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 text-center flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Curriculum
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
-            </motion.div>
-
-            {/* Trust Indicators */}
-            <motion.div 
-              className="flex flex-col sm:flex-row items-center gap-8 pt-8 text-sm text-gray-500"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-10 h-10 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full border-2 border-white shadow-lg"></div>
-                  ))}
-                </div>
-                <span className="text-gray-700 font-medium">Join 500+ Members</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span>No Experience Required</span>
-                </div>
-                <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
-                <div className="flex items-center gap-2">
-                  <Medal className="w-4 h-4 text-yellow-500" />
-                  <span>Certified Coaches</span>
-                </div>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-blue-600/25"
+                >
+                  Start Training <ArrowRight className="w-5 h-5" />
+                </a>
+                <button className="px-8 py-4 border border-white/30 text-white rounded-xl font-bold text-lg hover:bg-white hover:text-black transition-all duration-300">
+                  Download Curriculum
+                </button>
               </div>
             </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Right Side - Image & Features */}
-        <div className="flex-1 relative bg-gray-900">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-gray-900"></div>
-          <div className="relative h-full flex items-center justify-center p-12">
-            <div className="w-full max-w-lg">
-              <motion.img
-                src="https://i.postimg.cc/7h5cKC6w/Heros3.jpg"
-                alt="Boxing Training"
-                className="w-full h-96 object-cover rounded-3xl shadow-2xl mb-8"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1 }}
-              />
-              
-              {/* Features Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                {features.slice(0, 4).map((feature, index) => (
-                  <motion.div
-                    key={feature.text}
-                    className="flex items-center gap-3 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="w-4 h-4 text-white" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-white font-semibold text-sm">{feature.text}</h3>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NEW LAYOUT: Stats & Features Side-by-Side */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            
-            {/* Left - Stats */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-8">
-                Why Choose <span className="text-blue-600">Fundamentals</span>
-              </h2>
-              
-              <div className="grid grid-cols-2 gap-8">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    className="text-center p-6 bg-blue-50 rounded-2xl border border-blue-200"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    whileHover={{ y: -5 }}
-                  >
-                    <div className="text-3xl font-bold text-blue-600 mb-2">
-                      {stat.number}
-                    </div>
-                    <div className="text-gray-600 text-sm">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Right - Features */}
-            <motion.div
-              className="space-y-6"
               initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="grid grid-cols-1 gap-4">
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={feature.text}
-                    className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ x: 5 }}
-                  >
-                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-gray-900 mb-1">{feature.text}</h3>
-                      <p className="text-gray-600 text-sm">{feature.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="rounded-2xl overflow-hidden border border-white/10">
+                <img
+                  src="https://i.postimg.cc/268gB9Nn/valentin3.jpg"
+                  alt="Boxing training"
+                  className="w-full h-80 object-cover"
+                />
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* NEW LAYOUT: Timeline Curriculum */}
-      <section id="curriculum" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              8-Week <span className="text-blue-600">Learning Journey</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Progressive curriculum designed to take you from complete beginner to confident boxer
-            </p>
-          </motion.div>
-
-          {/* Timeline */}
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-200"></div>
-            
-            {curriculumSections.map((section, index) => (
+      <section className="py-16 bg-black border-y border-white/5">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { number: "12-Week", label: "Structured Curriculum" },
+              { number: "3 Levels", label: "Beginner to Advanced" },
+              { number: "1-on-1", label: "Personal Coaching" },
+              { number: "Sparring", label: "Optional & Supervised" },
+            ].map((s, i) => (
               <motion.div
-                key={section.title}
-                className={`relative flex items-center mb-16 ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                }`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center"
               >
-                {/* Content */}
-                <div className={`w-1/2 ${index % 2 === 0 ? 'pr-12' : 'pl-12'}`}>
-                  <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                        <section.icon className="w-6 h-6 text-blue-600" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900">{section.title}</h3>
-                        <p className="text-blue-600 text-sm font-medium">{section.duration}</p>
-                      </div>
-                    </div>
-                    <ul className="space-y-2">
-                      {section.items.map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-gray-600">
-                          <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                          <span className="text-sm">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-1">
+                  {s.number}
                 </div>
-
-                {/* Timeline Dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-600 rounded-full border-4 border-white shadow-lg"></div>
+                <div className="text-white/50 text-sm">{s.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* NEW LAYOUT: Side-by-Side CTA */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            
-            {/* Left - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-                Ready to <span className="text-blue-600">Begin</span> Your Journey?
-              </h2>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Join hundreds of beginners who started with zero experience and discovered 
-                confidence, fitness, and community through boxing fundamentals.
-              </p>
-
-              {/* Class Info */}
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-xl">
-                  <Calendar className="w-6 h-6 text-blue-600" />
-                  <div>
-                    <div className="font-semibold text-gray-900">Class Schedule</div>
-                    <div className="text-gray-600 text-sm">Mon, Wed, Fri • 6:00 PM - 7:00 PM</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-xl">
-                  <MapPin className="w-6 h-6 text-blue-600" />
-                  <div>
-                    <div className="font-semibold text-gray-900">Location</div>
-                    <div className="text-gray-600 text-sm">KG 456 St, Kigali Sports District</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <motion.a
-                  href="/booking"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-center transition-all duration-300 flex items-center justify-center gap-3"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+      <section className="py-24 bg-black">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4">
+              The Four{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                Foundations
+              </span>
+            </h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">
+              Every champion's journey begins with mastering the basics. Our
+              curriculum builds upon these essential pillars.
+            </p>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {foundations.map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 hover:border-blue-500/40 transition-all duration-300 group"
                 >
-                  Start Free Trial
-                  <PlayCircle className="w-5 h-5" />
-                </motion.a>
-                
-                <motion.a
-                  href="/contact"
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-center transition-all duration-300 flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Phone className="w-4 h-4" />
-                  Call to Inquire
-                </motion.a>
-              </div>
-            </motion.div>
-
-            {/* Right - Guarantee Card */}
-            <motion.div
-              className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-8 text-white shadow-2xl"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Award className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4">30-Day Satisfaction Guarantee</h3>
-                <p className="text-blue-100 mb-6 leading-relaxed">
-                  If you're not completely satisfied with your progress after 30 days, 
-                  we'll refund your membership. No questions asked.
-                </p>
-                <div className="flex items-center justify-center gap-2 text-blue-200">
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span className="font-semibold">Risk-Free Start</span>
-                </div>
-              </div>
-            </motion.div>
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                    <Icon className="w-7 h-7 text-blue-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {f.title}
+                  </h3>
+                  <p className="text-white/60 text-sm leading-relaxed">
+                    {f.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
+
+      <section className="py-24 bg-gradient-to-b from-black to-slate-900">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4">
+              12-Week{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                Curriculum
+              </span>
+            </h2>
+            <p className="text-white/60 text-lg">
+              Progressive training designed to take you from novice to skilled
+              boxer.
+            </p>
+          </motion.div>
+          <div className="grid lg:grid-cols-3 gap-6">
+            {curriculum.map((c, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 hover:border-blue-500/40 transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-white">{c.level}</h3>
+                  <span className="bg-blue-600/20 text-blue-300 text-xs px-3 py-1 rounded-full font-medium border border-blue-500/30">
+                    Weeks {c.weeks}
+                  </span>
+                </div>
+                <div className="space-y-3">
+                  {c.topics.map((t, j) => (
+                    <div
+                      key={j}
+                      className="flex items-start gap-3 text-sm text-white/50"
+                    >
+                      <CheckCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      {t}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-black">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4">
+              Training{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                in Action
+              </span>
+            </h2>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {gallery.map((m, i) => (
+              <motion.div
+                key={m.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group cursor-pointer rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-blue-500/40 transition-all duration-500"
+                onClick={() => open(m, i)}
+              >
+                <div className="relative aspect-square overflow-hidden">
+                  <img
+                    src={m.src}
+                    alt={m.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div>
+                      <h3 className="text-white font-bold text-lg">
+                        {m.title}
+                      </h3>
+                      <p className="text-white/60 text-sm">{m.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto space-y-6"
+          >
+            <h2 className="text-4xl lg:text-5xl font-black text-white">
+              Ready to Build Your Foundation?
+            </h2>
+            <p className="text-lg text-blue-100">
+              Join our structured program and develop skills that last a
+              lifetime.
+            </p>
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg"
+            >
+              Begin Your Journey <ArrowRight className="w-5 h-5" />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-[99999] flex items-center justify-center p-4"
+          >
+            <button
+              onClick={close}
+              className="absolute top-6 right-6 z-50 w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center border border-white/20"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            {gallery.length > 1 && (
+              <>
+                <button
+                  onClick={() => nav(-1)}
+                  className="absolute left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center border border-white/30"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={() => nav(1)}
+                  className="absolute right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center border border-white/30"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </>
+            )}
+            <motion.div
+              key={selected.id}
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              className="max-w-4xl w-full"
+            >
+              <img
+                src={selected.src}
+                alt={selected.title}
+                className="w-full max-h-[75vh] object-contain rounded-2xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </>

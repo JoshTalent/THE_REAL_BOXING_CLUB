@@ -1,350 +1,328 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  ChevronDown, 
-  X, 
-  Menu, 
-  Star, 
-  Phone, 
-  Clock,
-  Dumbbell,
-  Trophy,
-  Users,
-  Calendar,
-  BookOpen,
-  Camera
-} from "lucide-react";
+import { ChevronDown, X, Menu, Dumbbell, Users, Heart, Phone, Clock, MapPin, ArrowRight, Sparkles, Award } from "lucide-react";
 
 const Navbar = () => {
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [openAccordion, setOpenAccordion] = useState(null);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openAcc, setOpenAcc] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [showTop, setShowTop] = useState(true);
+  const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
-  const mobileMenuRef = useRef(null);
+  const mobileRef = useRef(null);
+  const lastScroll = useRef(0);
 
-  // FIXED: Scroll effect for navbar - works on all pages
   const updateScrollState = () => {
-    setIsScrolled(window.scrollY > 50);
+    const y = window.scrollY;
+    setScrolled(y > 50);
+    setShowTop(y < 80 || y < lastScroll.current);
+    lastScroll.current = y;
   };
 
   useEffect(() => {
-    // Initial check
     updateScrollState();
-    
-    // Listen for scroll
-    window.addEventListener("scroll", updateScrollState);
-    
-    return () => {
-      window.removeEventListener("scroll", updateScrollState);
-    };
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
   }, []);
 
-  // FIXED: Check scroll when location changes
   useEffect(() => {
-    // Check scroll immediately
     updateScrollState();
-    
-    // Also check after a small delay to ensure page is loaded
-    const timer = setTimeout(() => {
-      updateScrollState();
-    }, 100);
-    
-    return () => clearTimeout(timer);
+    const t = setTimeout(updateScrollState, 100);
+    return () => clearTimeout(t);
   }, [location]);
 
-  // Close mobile menu when route changes
   useEffect(() => {
-    setIsMobileOpen(false);
-    setOpenAccordion(null);
+    setMobileOpen(false);
+    setOpenAcc(null);
   }, [location]);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (mobileMenuRef.current && 
-          !mobileMenuRef.current.contains(event.target) && 
-          !event.target.closest('[data-menu-button]')) {
-        setIsMobileOpen(false);
+    const handle = (e) => {
+      if (mobileRef.current && !mobileRef.current.contains(e.target) && !e.target.closest("[data-menu-btn]")) {
+        setMobileOpen(false);
       }
     };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
-    
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
+    document.addEventListener("mousedown", handle);
+    document.addEventListener("touchstart", handle);
+    return () => { document.removeEventListener("mousedown", handle); document.removeEventListener("touchstart", handle); };
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileOpen) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-    } else {
-      document.body.style.overflow = 'unset';
-      document.body.style.touchAction = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-      document.body.style.touchAction = 'unset';
-    };
-  }, [isMobileOpen]);
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    document.body.style.touchAction = mobileOpen ? "none" : "";
+    return () => { document.body.style.overflow = ""; document.body.style.touchAction = ""; };
+  }, [mobileOpen]);
 
   const programsMenu = [
-    { 
-      name: "Boxing Fundamentals", 
-      to: "/programs/fundamentals",
-      icon: Dumbbell,
-      description: "Master the basics - perfect for beginners"
-    },
-    { 
-      name: "Boxing Fitness", 
-      to: "/programs/fitness",
-      icon: Users,
-      description: "Get fit, stay strong - no sparring"
-    },
-    { 
-      name: "Kids & Teens Boxing", 
-      to: "/programs/kids-teens",
-      icon: Users,
-      description: "Youth development programs"
-    },
+    { name: "Boxing Fundamentals", to: "/programs/fundamentals", icon: Dumbbell, tag: "Competitive" },
+    { name: "Boxing Fitness", to: "/programs/fitness", icon: Users, tag: "No Sparring" },
+    { name: "Kids & Teens", to: "/programs/kids-teens", icon: Users, tag: "Ages 5-17" },
   ];
 
-  const isActiveLink = (path) => {
-    return location.pathname === path;
-  };
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
+    { to: "/gallery", label: "Gallery" },
+    { to: "/coaches", label: "Coaches" },
+    { to: "/blog", label: "Blog" },
+    { to: "/donate", label: "Donate" },
+  ];
 
-  const isActiveParent = (paths) => {
-    return paths.some(path => location.pathname.startsWith(path));
-  };
+  const isActive = (p) => location.pathname === p;
+  const isActiveParent = (paths) => paths.some(p => location.pathname.startsWith(p));
 
   return (
     <>
-      {/* Main Navbar - FIXED: Added proper z-index */}
-      <nav className={`fixed w-full z-[9999] transition-all duration-500 ${
-        isScrolled 
-          ? "bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-blue-500/20" 
-          : "bg-transparent"
+      {/* Top Bar */}
+      <AnimatePresence>
+        {showTop && !scrolled && (
+          <motion.div
+            initial={{ y: -32, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -32, opacity: 0 }}
+            className="fixed top-0 left-0 right-0 z-[9999] bg-black/80 backdrop-blur-md border-b border-white/5"
+          >
+            <div className="max-w-7xl mx-auto px-4 lg:px-8">
+              <div className="flex items-center justify-center lg:justify-between h-8 text-[11px]">
+                <div className="hidden lg:flex items-center gap-6 text-white/40">
+                  <span className="flex items-center gap-1.5"><Phone className="w-3 h-3 text-blue-400" /> +250 781 288 442</span>
+                  <span className="flex items-center gap-1.5"><Clock className="w-3 h-3 text-blue-400" /> Mon-Sun: 6am - 9pm</span>
+                  <span className="flex items-center gap-1.5"><MapPin className="w-3 h-3 text-blue-400" /> KG 456 St, Kigali</span>
+                </div>
+                <div className="flex items-center gap-4 text-white/40">
+                  <span className="flex items-center gap-1.5"><Award className="w-3 h-3 text-yellow-500" /> 15+ National Champions</span>
+                  <span className="hidden sm:flex items-center gap-1.5"><Sparkles className="w-3 h-3 text-blue-400" /> Free Trial Class</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main Nav */}
+      <nav className={`fixed w-full z-[9999] transition-all duration-700 ${
+        showTop && !scrolled ? "top-8" : "top-0"
+      } ${
+        scrolled
+          ? "bg-slate-900/95 backdrop-blur-2xl shadow-[0_4px_60px_rgba(0,0,0,0.5)] border-b border-white/5"
+          : "bg-gradient-to-b from-black/60 via-black/30 to-transparent"
       }`}>
-     
-        {/* Main Navbar Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {scrolled && (
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-purple-600/5 pointer-events-none" />
+        )}
+
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="flex justify-between items-center h-16 lg:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="relative"
-              >
-                <div className="w-10 h-10 lg:w-12 lg:h-12  flex items-center justify-center ">
-                 <img src="https://i.postimg.cc/7PfX5GWk/logo.png" alt="" srcset="" />
+            <Link to="/" className="flex items-center gap-3 group relative z-10">
+              <motion.div whileHover={{ scale: 1.05, rotate: -3 }} className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative w-10 h-10 lg:w-11 lg:h-11 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/20 group-hover:border-blue-400/40 transition-all">
+                  <img src="https://i.postimg.cc/7PfX5GWk/logo.png" alt="" className="w-7 h-7 lg:w-8 lg:h-8" />
                 </div>
               </motion.div>
               <div className="flex flex-col">
-                <span className="text-lg lg:text-xl font-black tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                THE REAL BOXING
+                <span className="text-base lg:text-lg font-black tracking-tight bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent leading-none group-hover:from-blue-200 group-hover:to-white transition-all">
+                  THE REAL BOXING
                 </span>
-                <span className="text-xs text-blue-400 font-semibold tracking-wider">
-                  CHAMPIONSHIP CLUB
+                <span className="text-[10px] lg:text-xs text-blue-400/80 font-semibold tracking-[0.2em] uppercase mt-0.5">
+                  Championship Club
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-              <NavLink to="/" isActive={isActiveLink("/")}>
-                HOME
-              </NavLink>
-              <NavLink to="/about" isActive={isActiveLink("/about")}>
-                ABOUT
-              </NavLink>
-              <NavLink to="/gallery" isActive={isActiveLink("/gallery")}>
-                GALLERY
-              </NavLink>
-              <NavLink to="/coaches" isActive={isActiveLink("/coaches")}>
-                COACHES
-              </NavLink>
-              <NavLink to="/blog" isActive={isActiveLink("/blog")}>
-                BLOG
-              </NavLink>
-              <EnhancedDropdown 
-                title="PROGRAMS" 
-                items={programsMenu} 
-                isActive={isActiveParent(['/programs'])}
-                isOpen={isDropdownOpen}
-                setIsOpen={setIsDropdownOpen}
+            {/* Desktop */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navLinks.map((link) => (
+                <NavLink key={link.to} to={link.to} isActive={isActive(link.to)}>
+                  {link.label}
+                </NavLink>
+              ))}
+
+              <ProgramsDropdown
+                items={programsMenu}
+                isActive={isActiveParent(["/programs"])}
+                isOpen={dropdown}
+                setIsOpen={setDropdown}
               />
-              
-          
-              <div className="flex items-center gap-3 ml-4 pl-4 border-l border-slate-700">
+
+              <div className="flex items-center gap-2 ml-4 pl-4 border-l border-white/10">
                 <Link to="/contact">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 rounded-lg border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300 font-semibold text-sm"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="relative px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 overflow-hidden group border border-blue-500/40 text-blue-300 hover:text-white"
                   >
-                    Contact
+                    <span className="relative z-10 flex items-center gap-2">
+                      Join Now <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </motion.button>
+                </Link>
+                <Link to="/donate">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="relative px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 overflow-hidden group"
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      <Heart className="w-3.5 h-3.5" /> Donate
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-800 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.button>
                 </Link>
               </div>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Toggle */}
             <motion.button
-              data-menu-button
-              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              data-menu-btn
+              onClick={() => setMobileOpen(!mobileOpen)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="lg:hidden w-10 h-10 rounded-lg bg-gradient-to-r from-blue-600/20 to-blue-700/20 border border-blue-500/30 flex items-center justify-center text-white backdrop-blur-sm"
-              aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+              className="lg:hidden w-10 h-10 rounded-xl bg-white/5 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm hover:bg-white/10 transition-all"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
-              {isMobileOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </motion.button>
           </div>
         </div>
       </nav>
 
-      {/* Enhanced Mobile Drawer - FIXED: Added higher z-index and isolated stacking context */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
-        {isMobileOpen && (
+        {mobileOpen && (
           <>
-            {/* Background Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998] lg:hidden"
-              onClick={() => setIsMobileOpen(false)}
+              className="fixed inset-0 bg-black/70 backdrop-blur-md z-[9998] lg:hidden"
+              onClick={() => setMobileOpen(false)}
             />
 
-            {/* Drawer */}
             <motion.div
-              ref={mobileMenuRef}
+              ref={mobileRef}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ 
-                type: "spring", 
-                damping: 30, 
-                stiffness: 300 
-              }}
-              className="fixed top-0 right-0 w-full max-w-sm h-full bg-gradient-to-b from-slate-900 to-black border-l border-blue-500/20 shadow-2xl flex flex-col z-[9999] overflow-y-auto isolate"
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
+              className="fixed top-0 right-0 w-full max-w-sm h-full bg-slate-900 border-l border-white/5 shadow-2xl flex flex-col z-[9999] overflow-y-auto"
             >
               {/* Drawer Header */}
-              <div className="flex justify-between items-center p-6 border-b border-slate-800 bg-gradient-to-r from-blue-600/10 to-blue-700/10 sticky top-0 bg-slate-900">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center border border-blue-400">
-                    <Trophy className="w-5 h-5 text-white" />
+              <div className="sticky top-0 z-10 p-6 border-b border-white/5 bg-slate-900/95 backdrop-blur-xl">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
+                      <img src="https://i.postimg.cc/7PfX5GWk/logo.png" alt="" className="w-6 h-6 brightness-0 invert" />
+                    </div>
+                    <div>
+                      <h2 className="text-base font-black text-white leading-none">REAL BOXING</h2>
+                      <p className="text-[10px] text-blue-400/70 tracking-widest uppercase mt-0.5">Championship Club</p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-lg font-black text-white">REAL BOXING</h2>
-                    <p className="text-xs text-blue-400">CHAMPIONSHIP CLUB</p>
-                  </div>
+                  <motion.button
+                    onClick={() => setMobileOpen(false)}
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors text-white/70 hover:text-white"
+                  >
+                    <X className="w-4 h-4" />
+                  </motion.button>
                 </div>
-                <motion.button
-                  onClick={() => setIsMobileOpen(false)}
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-blue-500/20 hover:text-blue-400 transition-colors text-white"
-                  aria-label="Close menu"
-                >
-                  <X className="w-5 h-5" />
-                </motion.button>
               </div>
 
-              {/* Drawer Links */}
-              <div className="flex-1 p-6 space-y-2">
-                <MobileLink
-                  to="/"
-                  label="HOME"
-                  isActive={isActiveLink("/")}
-                  closeMenu={() => setIsMobileOpen(false)}
-                />
-                <MobileLink
-                  to="/about"
-                  label="ABOUT"
-                  isActive={isActiveLink("/about")}
-                  closeMenu={() => setIsMobileOpen(false)}
-                />
-                <MobileLink
-                  to="/gallery"
-                  label="GALLERY"
-                  isActive={isActiveLink("/gallery")}
-                  closeMenu={() => setIsMobileOpen(false)}
-                />
-                <MobileLink
-                  to="/coaches"
-                  label="COACHES"
-                  isActive={isActiveLink("/coaches")}
-                  closeMenu={() => setIsMobileOpen(false)}
-                />
-                <MobileLink
-                  to="/blog"
-                  label="BLOG"
-                  isActive={isActiveLink("/blog")}
-                  closeMenu={() => setIsMobileOpen(false)}
-                />
+              {/* Navigation */}
+              <div className="flex-1 p-6 space-y-1">
+                {[...navLinks, { to: "/contact", label: "Contact" }].map((link, i) => (
+                  <motion.div
+                    key={link.to}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04 }}
+                  >
+                    <MobileLink
+                      to={link.to}
+                      label={link.label}
+                      isActive={isActive(link.to)}
+                      onClick={() => setMobileOpen(false)}
+                    />
+                  </motion.div>
+                ))}
 
-                {/* Enhanced Accordions */}
-                <EnhancedMobileAccordion
-                  title="PROGRAMS"
-                  menu={programsMenu}
-                  openAccordion={openAccordion}
-                  setOpenAccordion={setOpenAccordion}
-                  closeMenu={() => setIsMobileOpen(false)}
-                  isActive={isActiveParent(['/programs'])}
-                />
-         
-                {/* Mobile CTA Buttons */}
-                <div className="pt-6 space-y-3">
-        
-                  <Link to="/contact" onClick={() => setIsMobileOpen(false)}>
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navLinks.length * 0.04 }}
+                >
+                  <MobileAccordion
+                    title="Programs"
+                    items={programsMenu}
+                    open={openAcc}
+                    setOpen={setOpenAcc}
+                    onClick={() => setMobileOpen(false)}
+                    isActive={isActiveParent(["/programs"])}
+                  />
+                </motion.div>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (navLinks.length + 1) * 0.04 }}
+                  className="pt-6 space-y-3"
+                >
+                  <Link to="/contact" onClick={() => setMobileOpen(false)}>
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full py-3 rounded-xl border-2 border-blue-500 text-blue-400 font-bold text-lg hover:bg-blue-500 hover:text-white transition-all duration-300"
+                      className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold text-base transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2"
                     >
-                      📞 Contact Coach
+                      Join Now <ArrowRight className="w-4 h-4" />
                     </motion.button>
                   </Link>
-                </div>
+                  <Link to="/donate" onClick={() => setMobileOpen(false)}>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full py-3.5 rounded-xl bg-white/5 text-white font-bold text-base border border-white/20 hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+                    >
+                      <Heart className="w-4 h-4" /> Donate
+                    </motion.button>
+                  </Link>
+                </motion.div>
 
                 {/* Contact Info */}
-                <div className="pt-6 border-t border-slate-800">
-                  <div className="space-y-3 text-sm text-slate-400">
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 text-blue-400" />
-                      <span>Call: (555) 123-4567</span>
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (navLinks.length + 2) * 0.04 }}
+                  className="pt-6 border-t border-white/5"
+                >
+                  <div className="space-y-3.5">
+                    <div className="flex items-center gap-3 text-sm text-white/50">
+                      <div className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center"><Phone className="w-4 h-4 text-blue-400" /></div>
+                      <span>+250 781 288 442</span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-4 h-4 text-blue-400" />
-                      <span>Mon-Fri: 5AM-10PM | Sat-Sun: 7AM-8PM</span>
+                    <div className="flex items-center gap-3 text-sm text-white/50">
+                      <div className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center"><Clock className="w-4 h-4 text-blue-400" /></div>
+                      <span>Mon-Sun: 6am - 9pm</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-white/50">
+                      <div className="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center"><MapPin className="w-4 h-4 text-blue-400" /></div>
+                      <span>KG 456 St, Kigali</span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
-              {/* Footer */}
-              <div className="p-6 border-t border-slate-800 bg-gradient-to-r from-blue-600/5 to-blue-700/5">
-                <div className="text-center text-slate-400 text-sm space-y-2">
-                  <div className="flex justify-center items-center gap-4">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-current text-yellow-500" />
-                      <span>4.9/5 Rating</span>
-                    </div>
-                    <div className="w-1 h-1 bg-slate-600 rounded-full"></div>
-                    <span>15+ Champions</span>
-                  </div>
-                  <p className="pt-2 text-xs">© 2024 The Real Boxing Club. All rights reserved.</p>
+              {/* Drawer Footer */}
+              <div className="p-6 border-t border-white/5 bg-slate-900/50">
+                <div className="flex justify-center items-center gap-4 text-sm text-white/40">
+                  <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-yellow-500" /> 15+ Champions</span>
+                  <span className="w-1 h-1 rounded-full bg-white/20" />
+                  <span className="flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5 text-blue-400" /> Free Trial</span>
                 </div>
               </div>
             </motion.div>
@@ -355,159 +333,131 @@ const Navbar = () => {
   );
 };
 
-/* Enhanced Desktop Nav Link */
+/* Desktop Nav Link */
 const NavLink = ({ to, children, isActive }) => (
   <Link
     to={to}
-    className={`relative px-3 py-2 font-semibold text-sm transition-all duration-300 group ${
-      isActive ? "text-blue-400" : "text-slate-300 hover:text-white"
+    className={`relative px-3.5 py-2 font-semibold text-sm tracking-wide transition-all duration-300 group ${
+      isActive ? "text-blue-400" : "text-white/70 hover:text-white"
     }`}
   >
     {children}
     {isActive && (
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
-        layoutId="navbar-indicator"
+        layoutId="nav-indicator"
+        className="absolute -bottom-0.5 left-3 right-3 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
       />
     )}
-    <div className={`absolute inset-0 bg-gradient-to-r from-blue-600/10 to-blue-700/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 ${
-      isActive ? "scale-100" : ""
+    <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
+      isActive
+        ? "bg-gradient-to-r from-blue-600/15 to-purple-600/15"
+        : "bg-white/5 scale-0 group-hover:scale-100"
     }`} />
   </Link>
 );
 
-/* Enhanced Desktop Dropdown */
-const EnhancedDropdown = ({ title, items, isActive, isOpen, setIsOpen, isSimple = false }) => {
-  return (
-    <div
-      className="relative group"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
-      <button className={`flex items-center px-3 py-2 font-semibold text-sm transition-all duration-300 group ${
-        isActive ? "text-blue-400" : "text-slate-300 hover:text-white"
-      }`}>
-        {title}
-        <ChevronDown
-          className={`ml-1 w-4 h-4 transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+/* Desktop Programs Dropdown */
+const ProgramsDropdown = ({ items, isActive, isOpen, setIsOpen }) => (
+  <div
+    className="relative"
+    onMouseEnter={() => setIsOpen(true)}
+    onMouseLeave={() => setIsOpen(false)}
+  >
+    <button className={`relative flex items-center gap-1.5 px-3.5 py-2 font-semibold text-sm tracking-wide transition-all duration-300 group ${
+      isActive ? "text-blue-400" : "text-white/70 hover:text-white"
+    }`}>
+      Programs
+      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+      {isActive && (
+        <motion.div
+          layoutId="nav-indicator"
+          className="absolute -bottom-0.5 left-3 right-3 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
         />
-        {isActive && (
-          <motion.div
-            className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
-            layoutId="navbar-indicator"
-          />
-        )}
-      </button>
-      
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute top-full left-0 mt-2 bg-slate-900/95 backdrop-blur-xl rounded-xl shadow-2xl border border-blue-500/20 p-3 w-64 z-[10000]"
-          >
-            <div className="space-y-1">
-              {items.map((item, idx) => (
-                <Link
-                  key={idx}
-                  to={item.to}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-600/20 hover:border-blue-500/30 border border-transparent transition-all duration-200 group"
-                >
-                  {!isSimple && (
-                    <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-4 h-4 text-white" />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-white group-hover:text-blue-300 transition-colors text-sm truncate">
-                      {item.name}
-                    </div>
-                    {!isSimple && item.description && (
-                      <div className="text-xs text-slate-400 mt-0.5 truncate">
-                        {item.description}
-                      </div>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
+      )}
+    </button>
 
-/* Enhanced Mobile Link */
-const MobileLink = ({ to, label, isActive, closeMenu }) => (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: 10, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 10, scale: 0.96 }}
+          transition={{ duration: 0.2 }}
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[280px] bg-slate-900/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/10 p-2 z-[10000] overflow-hidden"
+        >
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-transparent" />
+          {items.map((item, idx) => (
+            <Link
+              key={idx}
+              to={item.to}
+              className="flex items-center gap-4 p-3.5 rounded-xl hover:bg-gradient-to-r hover:from-blue-600/15 hover:to-purple-600/15 border border-transparent hover:border-blue-500/20 transition-all duration-200 group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-600/20">
+                <item.icon className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-white group-hover:text-blue-300 transition-colors text-sm">{item.name}</div>
+                <div className="text-xs text-white/40 mt-0.5">{item.tag}</div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
+            </Link>
+          ))}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+);
+
+/* Mobile Link */
+const MobileLink = ({ to, label, isActive, onClick }) => (
   <Link
     to={to}
-    onClick={closeMenu}
-    className={`block py-3 px-4 rounded-xl text-base font-semibold transition-all duration-300 border ${
-      isActive 
-        ? "bg-gradient-to-r from-blue-600/20 to-blue-700/20 border-blue-500/30 text-blue-400" 
-        : "text-slate-300 hover:bg-slate-800 hover:text-white border-transparent"
+    onClick={onClick}
+    className={`block py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-300 border ${
+      isActive
+        ? "bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-blue-500/30 text-blue-400"
+        : "text-white/60 hover:bg-white/5 hover:text-white border-transparent"
     }`}
   >
     {label}
   </Link>
 );
 
-/* Enhanced Mobile Accordion */
-const EnhancedMobileAccordion = ({
-  title,
-  menu,
-  openAccordion,
-  setOpenAccordion,
-  closeMenu,
-  isActive
-}) => {
-  const isOpen = openAccordion === title;
-  
+/* Mobile Accordion */
+const MobileAccordion = ({ title, items, open, setOpen, onClick, isActive }) => {
+  const isOpen = open === title;
   return (
     <div className={`rounded-xl overflow-hidden border ${
-      isActive ? "bg-gradient-to-r from-blue-600/10 to-blue-700/10 border-blue-500/20" : "border-transparent"
+      isActive ? "bg-gradient-to-r from-blue-600/10 to-purple-600/10 border-blue-500/20" : "border-transparent"
     }`}>
       <button
-        onClick={() => setOpenAccordion(isOpen ? null : title)}
-        className={`flex items-center justify-between w-full py-3 px-4 text-base font-semibold transition-all duration-300 ${
-          isOpen ? "text-blue-400" : "text-slate-300 hover:text-white"
+        onClick={() => setOpen(isOpen ? null : title)}
+        className={`flex items-center justify-between w-full py-3 px-4 text-sm font-semibold transition-all duration-300 ${
+          isOpen ? "text-blue-400" : "text-white/60 hover:text-white"
         }`}
       >
         <span>{title}</span>
-        <ChevronDown
-          className={`w-4 h-4 transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
       </button>
-      
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
             <div className="pb-2 px-2 space-y-1">
-              {menu.map((item, idx) => (
+              {items.map((item, idx) => (
                 <Link
                   key={idx}
                   to={item.to}
-                  onClick={closeMenu}
-                  className="flex items-center gap-3 py-2 px-3 rounded-lg bg-slate-800/50 hover:bg-blue-600/20 border border-transparent hover:border-blue-500/30 transition-all duration-200 group"
+                  onClick={onClick}
+                  className="flex items-center gap-3 py-2.5 px-3 rounded-lg bg-white/5 hover:bg-blue-600/20 border border-transparent hover:border-blue-500/20 transition-all duration-200"
                 >
-                  {item.icon && (
-                    <item.icon className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                  )}
-                  <span className="text-slate-300 group-hover:text-white transition-colors text-sm">
-                    {item.name}
-                  </span>
+                  <item.icon className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span className="text-white/70 hover:text-white transition-colors text-sm">{item.name}</span>
                 </Link>
               ))}
             </div>

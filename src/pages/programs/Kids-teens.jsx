@@ -2,455 +2,129 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import {
-  Shield,
-  Heart,
-  Target,
-  Users,
-  Star,
-  Award,
-  CheckCircle,
-  MessageCircle,
-  Phone,
-  Play,
-  X,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
-const KidsTeensBoxing = () => {
-  const [selectedMedia, setSelectedMedia] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+import { Star, Heart, Users, Shield, Sparkles, Award, ArrowRight, X, ChevronLeft, ChevronRight, CheckCircle } from "lucide-react";
 
-  const ageGroups = [
-    {
-      range: "6-8 Years",
-      title: "Little Champions",
-      focus:
-        "Fundamental movement skills, basic coordination, and fun introduction to boxing",
-      features: [
-        "Fun games & activities",
-        "Basic stance & footwork",
-        "Coordination drills",
-        "Social skills development",
-      ],
-      icon: Star,
-      color: "from-blue-400 to-cyan-400",
-    },
-    {
-      range: "9-12 Years",
-      title: "Junior Warriors",
-      focus:
-        "Technical foundation, discipline development, and confidence building",
-      features: [
-        "Proper punching technique",
-        "Defensive movements",
-        "Fitness fundamentals",
-        "Teamwork exercises",
-      ],
-      icon: Target,
-      color: "from-blue-500 to-blue-700",
-    },
-    {
-      range: "13-17 Years",
-      title: "Future Champions",
-      focus:
-        "Advanced techniques, physical conditioning, and leadership development",
-      features: [
-        "Advanced combinations",
-        "Strength & conditioning",
-        "Competition preparation",
-        "Leadership skills",
-      ],
-      icon: Award,
-      color: "from-blue-600 to-blue-800",
-    },
-  ];
+const KidsTeens = () => {
+  const [selected, setSelected] = useState(null);
+  const [idx, setIdx] = useState(0);
 
   const benefits = [
-    {
-      icon: Shield,
-      title: "Bullying Prevention",
-      desc: "Build confidence and awareness to handle challenging situations",
-    },
-    {
-      icon: Heart,
-      title: "Discipline & Focus",
-      desc: "Develop self-control and concentration through structured training",
-    },
-    {
-      icon: Target,
-      title: "Confidence Building",
-      desc: "Achieve milestones and build self-esteem in a supportive environment",
-    },
-    {
-      icon: Users,
-      title: "Social Skills",
-      desc: "Learn teamwork, respect, and sportsmanship with peers",
-    },
-    {
-      icon: Star,
-      title: "Fun & Engagement",
-      desc: "Enjoyable activities that make fitness something to look forward to",
-    },
-    {
-      icon: Award,
-      title: "Skill Development",
-      desc: "Learn proper boxing techniques in a safe, age-appropriate way",
-    },
+    { icon: Star, title: "Confidence Building", desc: "Develop self-belief and poise through achievement in a structured environment that celebrates every milestone." },
+    { icon: Shield, title: "Self-Discipline", desc: "Learn focus, respect, and commitment through the principles of boxing training and personal accountability." },
+    { icon: Heart, title: "Physical Fitness", desc: "Build strength, coordination, and cardiovascular health through fun and engaging age-appropriate workouts." },
+    { icon: Users, title: "Social Skills", desc: "Make friends and learn teamwork in a positive, supportive community with shared goals and interests." },
+    { icon: Sparkles, title: "Focus & Concentration", desc: "Sharpen mental clarity and academic performance through improved concentration and goal-setting habits." },
+    { icon: Award, title: "Character Development", desc: "Instill values like perseverance, humility, and sportsmanship that extend well beyond the gym walls." },
   ];
 
-  const safetyFeatures = [
-    {
-      title: "Certified Coaches",
-      description: "All coaches are certified in youth training and first aid",
-      icon: CheckCircle,
-    },
-    {
-      title: "Safety-First Equipment",
-      description: "Age-appropriate gloves, headgear, and protective gear",
-      icon: Shield,
-    },
-    {
-      title: "Structured Curriculum",
-      description: "Progressive learning designed for each age group",
-      icon: Target,
-    },
-    {
-      title: "Positive Environment",
-      description: "Zero tolerance for bullying, focused on encouragement",
-      icon: Heart,
-    },
+  const groups = [
+    { name: "Little Champions", ages: "5-8", time: "45 min", focus: "Fun movement games, basic coordination, listening skills, and building a love for activity.", features: ["Obstacle courses", "Balance games", "Basic punches on pads", "Group activities"] },
+    { name: "Junior Boxers", ages: "9-12", time: "60 min", focus: "Structured boxing fundamentals, fitness circuits, teamwork, and character development.", features: ["Technical instruction", "Partner drills", "Fitness challenges", "Leadership roles"] },
+    { name: "Teen Athletes", ages: "13-17", time: "75 min", focus: "Advanced boxing skills, strength conditioning, goal setting, and competition preparation.", features: ["Advanced combos", "Sparring (optional)", "Strength training", "Mentorship program"] },
   ];
 
-  const programStats = [
-    { number: "100%", label: "Safety-Focused Training" },
-    { number: "5:1", label: "Student to Coach Ratio" },
-    { number: "10+", label: "Certified Youth Coaches" },
-    { number: "0", label: "Tolerance for Bullying" },
+  const gallery = [
+    { id: 1, src: "https://i.postimg.cc/3wZPN5V3/frank.jpg", title: "Youth Class", desc: "Young athletes learning together" },
+    { id: 2, src: "https://i.postimg.cc/vBHC62wH/valentin.jpg", title: "Skill Development", desc: "Building technique through practice" },
+    { id: 3, src: "https://i.postimg.cc/KjVVcr0s/IMG-20241222-WA0016.jpg", title: "Team Spirit", desc: "Celebrating progress as a team" },
   ];
 
-  const galleryMedia = [
-    {
-      id: 1,
-      type: "image",
-      src: "https://i.postimg.cc/3wZPN5V3/frank.jpg",
-      title: "Frank KALISA ",
-      description:
-        "Young champions learning proper technique in a safe environment",
-      category: "training",
-    },
-    {
-      id: 2,
-      type: "image",
-      src: "https://i.postimg.cc/7h5cKC6w/Heros3.jpg",
-      title: "Anelica NSABIMANA",
-      description: "Engaging games that teach coordination and boxing basics",
-      category: "activities",
-    },
-    {
-      id: 3,
-      type: "image",
-      src:"https://i.postimg.cc/RFV2npxF/valentin2.jpg",
-      title: "Valentin NTABANGANYIMANA",
-      description: "Certified coaches ensuring proper technique and safety",
-      category: "coaching",
-    },
-  ];
-
-  const openMedia = (media, index) => {
-    setSelectedMedia(media);
-    setCurrentIndex(index);
-  };
-
-  const closeMedia = () => {
-    setSelectedMedia(null);
-  };
-
-  const navigateMedia = (direction) => {
-    let newIndex;
-    if (direction === "next") {
-      newIndex = (currentIndex + 1) % galleryMedia.length;
-    } else {
-      newIndex = (currentIndex - 1 + galleryMedia.length) % galleryMedia.length;
-    }
-    setCurrentIndex(newIndex);
-    setSelectedMedia(galleryMedia[newIndex]);
-  };
+  const open = (item, i) => { setSelected(item); setIdx(i); };
+  const close = () => setSelected(null);
+  const nav = (d) => { const n = (idx + d + gallery.length) % gallery.length; setIdx(n); setSelected(gallery[n]); };
 
   return (
     <>
       <Navbar />
 
-      {/* NEW LAYOUT: Split Screen Hero */}
-      <section className="min-h-screen bg-white flex flex-col lg:flex-row">
-        {/* Left Side - Content */}
-        <div className="flex-1 flex items-center justify-center p-12 bg-gradient-to-br from-blue-50 to-white">
-          <motion.div
-            className="max-w-2xl space-y-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.div
-              className="space-y-6"
-              variants={{
-                hidden: { x: -50, opacity: 0 },
-                visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
-              }}
-            >
-              <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-100 rounded-full">
-                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">
-                  SAFE • FUN • EDUCATIONAL
-                </span>
+      <section className="relative min-h-[70vh] bg-black flex items-center pt-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.1),transparent_60%)]" />
+        <div className="relative z-10 container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[55vh]">
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
+                <span className="text-sm font-medium text-white/90">AGES 5-17 • SAFE & SUPPORTIVE</span>
               </div>
-
-              <h1 className="text-6xl md:text-7xl font-black leading-tight">
-                Kids & Teens
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
-                  Boxing Program
-                </span>
+              <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight">
+                Youth
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Boxing Program</span>
               </h1>
-
-              <p className="text-xl text-gray-600 leading-relaxed">
-                <strong>Age-appropriate boxing training</strong> designed to
-                build confidence, discipline, and physical fitness while
-                providing essential skills for bullying prevention.
-              </p>
+              <p className="text-lg text-white/60 leading-relaxed">Empowering young minds and bodies through the transformative power of boxing. Our age-appropriate programs build confidence, discipline, and lifelong healthy habits.</p>
+              <div className="flex flex-wrap gap-4">
+                <a href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-blue-600/25">Enroll Your Child <ArrowRight className="w-5 h-5" /></a>
+                <button className="px-8 py-4 border border-white/30 text-white rounded-xl font-bold text-lg hover:bg-white hover:text-black transition-all duration-300">View Schedule</button>
+              </div>
             </motion.div>
-
-            {/* Parent Reassurance Features */}
-            <motion.div
-              className="grid grid-cols-2 gap-6"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: 0.3, duration: 0.8 },
-                },
-              }}
-            >
-              {[
-                "🛡️ Certified Safety-First Coaches",
-                "🎯 Age-Appropriate Training",
-                "🌟 Bullying Prevention Focus",
-                "🤝 Positive Social Environment",
-              ].map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 text-gray-700"
-                >
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="text-sm font-medium">{feature}</span>
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              className="flex flex-wrap gap-4"
-              variants={{
-                hidden: { y: 30, opacity: 0 },
-                visible: {
-                  y: 0,
-                  opacity: 1,
-                  transition: { delay: 0.8, duration: 0.8 },
-                },
-              }}
-            >
-              <button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/30">
-                Book Free Trial Class
-              </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300">
-                Meet Our Coaches
-              </button>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Right Side - Featured Image */}
-        <div className="flex-1 relative bg-gray-900">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-gray-900"></div>
-          <div className="relative h-full flex items-center justify-center p-12">
-            <motion.div
-              className="w-full max-w-md"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-            >
-              <img
-                src="https://i.postimg.cc/7h5cKC6w/Heros3.jpg"
-                alt="Kids enjoying boxing training"
-                className="w-full h-96 object-cover rounded-3xl shadow-2xl"
-              />
-              <div className="mt-4 text-center text-white">
-                <h3 className="text-xl font-bold">
-                  Safe & Supervised Training
-                </h3>
-                <p className="text-gray-300 text-sm mt-1">
-                  Certified coaches ensuring proper technique and safety
-                </p>
+            <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
+              <div className="rounded-2xl overflow-hidden border border-white/10">
+                <img src="https://i.postimg.cc/7h5cKC6w/Heros3.jpg" alt="Youth boxing class" className="w-full h-80 object-cover" />
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {programStats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="text-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600 text-sm md:text-base font-medium">
-                  {stat.label}
-                </div>
+      <section className="py-16 bg-black border-y border-white/5">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { number: "3 Age", label: "Groups (5-17)" },
+              { number: "Safe", label: "No-Sparring Option" },
+              { number: "1-on-1", label: "Mentorship" },
+              { number: "100%", label: "Positive Environment" },
+            ].map((s, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
+                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-1">{s.number}</div>
+                <div className="text-white/50 text-sm">{s.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Gallery Section - Enhanced */}
-      <section className="py-24 bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-100 rounded-full mb-6">
-              <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-              <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">
-                Champions in Action
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              See Our{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
-                Champions
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Watch as children build confidence, make friends, and develop
-              skills in our supportive environment
-            </p>
+      <section className="py-24 bg-black">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4">Why Kids Love <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Boxing</span></h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">Boxing builds more than athletic skills — it shapes character and creates confident young people.</p>
           </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {galleryMedia.map((media, index) => (
-              <motion.div
-                key={media.id}
-                className="group cursor-pointer bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                onClick={() => openMedia(media, index)}
-              >
-                <div className="relative aspect-square overflow-hidden">
-                  <img
-                    src={media.type === "video" ? media.thumbnail : media.src}
-                    alt={media.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="text-lg font-bold mb-2">{media.title}</h3>
-                      <p className="text-gray-300 text-sm">
-                        {media.description}
-                      </p>
-                    </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {benefits.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 hover:border-blue-500/40 transition-all duration-300 group">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                    <Icon className="w-7 h-7 text-blue-400" />
                   </div>
-
-                  {/* Video Play Button */}
-                  {media.type === "video" && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
-                        <Play className="w-6 h-6 text-white ml-1" />
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+                  <h3 className="text-xl font-bold text-white mb-3">{b.title}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">{b.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Age Groups Section - Enhanced Layout */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-100 rounded-full mb-6">
-              <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-              <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">
-                Age-Appropriate Programs
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              Designed for{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
-                Every Age
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Age-appropriate programs that grow with your child, from
-              fundamental skills to advanced techniques
-            </p>
+      <section className="py-24 bg-gradient-to-b from-black to-slate-900">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4">Age <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Groups</span></h2>
+            <p className="text-white/60 text-lg">Every child trains at their own level with age-appropriate instruction and equipment.</p>
           </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {ageGroups.map((group, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-100"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-              >
-                <div className="text-center mb-6">
-                  <div
-                    className={`w-20 h-20 bg-gradient-to-r ${group.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
-                  >
-                    <group.icon className="w-10 h-10 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">
-                    {group.range}
-                  </h3>
-                  <h4 className="text-lg font-semibold text-blue-600 mb-3">
-                    {group.title}
-                  </h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {group.focus}
-                  </p>
+          <div className="grid lg:grid-cols-3 gap-6">
+            {groups.map((g, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 hover:border-blue-500/40 transition-all duration-300">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xl font-bold text-white">{g.name}</h3>
+                  <span className="bg-blue-600/20 text-blue-300 text-xs px-3 py-1 rounded-full font-medium border border-blue-500/30">{g.time}</span>
                 </div>
-
-                <div className="space-y-3">
-                  {group.features.map((feature, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-3 text-gray-700"
-                    >
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                      <span className="text-sm font-medium">{feature}</span>
+                <div className="text-white/50 text-xs font-medium mb-4">Ages {g.ages}</div>
+                <p className="text-white/60 text-sm leading-relaxed mb-6">{g.focus}</p>
+                <div className="space-y-2">
+                  {g.features.map((f, j) => (
+                    <div key={j} className="flex items-center gap-2 text-sm text-white/50">
+                      <CheckCircle className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                      {f}
                     </div>
                   ))}
                 </div>
@@ -460,273 +134,54 @@ const KidsTeensBoxing = () => {
         </div>
       </section>
 
-      {/* Benefits Section - Enhanced Layout */}
-      <section className="py-24 bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-100 rounded-full mb-6">
-              <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-              <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">
-                Beyond Boxing
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              More Than{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
-                Just Boxing
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Building character and life skills that extend far beyond the gym
-            </p>
+      <section className="py-24 bg-black">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-black text-white mb-4">Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Youth Community</span></h2>
           </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <benefit.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-xl font-black text-gray-900 mb-3">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">{benefit.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Safety & Parent Reassurance Section - Enhanced */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-100 rounded-full mb-6">
-              <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-              <span className="text-blue-700 font-semibold text-sm uppercase tracking-wide">
-                Your Child's Safety
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              Safety is Our{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
-                Priority
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We understand your concerns and have built our program around
-              safety and positive development
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {safetyFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="text-center p-6"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-8 h-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-black text-gray-900 mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Parent-Friendly Features */}
-          <motion.div
-            className="mt-16 bg-gradient-to-r from-blue-600 to-blue-800 rounded-3xl p-12 text-center text-white"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h3 className="text-3xl font-black mb-8">
-              👨‍👩‍👧‍👦 Parent-Friendly Features
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div>
-                <strong className="text-xl block mb-2">Viewing Area</strong>
-                <p className="text-blue-100">
-                  Comfortable space to watch training
-                </p>
-              </div>
-              <div>
-                <strong className="text-xl block mb-2">Progress Reports</strong>
-                <p className="text-blue-100">
-                  Regular updates on your child's development
-                </p>
-              </div>
-              <div>
-                <strong className="text-xl block mb-2">
-                  Flexible Scheduling
-                </strong>
-                <p className="text-blue-100">
-                  Classes that work with your family's routine
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* NEW LAYOUT: Side-by-Side CTA */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-                Ready to Empower Your Child?
-              </h2>
-              <p className="text-xl text-gray-600 mb-8">
-                Give your child the gift of confidence, discipline, and fun
-                through our carefully designed boxing program. Join our family
-                of young champions today!
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  Book Free Trial Class
-                </button>
-                <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300">
-                  Download Parent Guide
-                </button>
-              </div>
-
-              <p className="text-gray-500 mt-6 text-sm">
-                🛡️ Certified Coaches • 🎯 Age-Appropriate • 🤝 Anti-Bullying
-                Focus • 🌟 Fun & Safe Environment
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <img
-                src="https://i.postimg.cc/268gB9Nn/valentin3.jpg"
-                alt="Young boxer training"
-                className="w-full h-96 object-cover rounded-3xl shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-lg">
-                <div className="text-2xl font-bold">100%</div>
-                <div className="text-sm">Safety Focused</div>
-                <div className="text-xs opacity-80">Training</div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Modal for Media View */}
-      <AnimatePresence>
-        {selectedMedia && (
-          <motion.div
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="relative max-w-6xl max-h-[90vh] w-full">
-              {/* Close Button */}
-              <button
-                onClick={closeMedia}
-                className="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors duration-200 z-10"
-              >
-                <X className="w-8 h-8" />
-              </button>
-
-              {/* Navigation Buttons */}
-              {galleryMedia.length > 1 && (
-                <>
-                  <button
-                    onClick={() => navigateMedia("prev")}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-blue-600 transition-all duration-200 z-10"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={() => navigateMedia("next")}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-blue-600 transition-all duration-200 z-10"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                </>
-              )}
-
-              {/* Media Content */}
-              <motion.div
-                key={selectedMedia.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="bg-white rounded-2xl overflow-hidden"
-              >
-                {selectedMedia.type === "image" ? (
-                  <img
-                    src={selectedMedia.src}
-                    alt={selectedMedia.title}
-                    className="w-full h-auto max-h-[70vh] object-contain"
-                  />
-                ) : (
-                  <div className="aspect-video w-full">
-                    <iframe
-                      src={selectedMedia.src}
-                      className="w-full h-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
+          <div className="grid md:grid-cols-3 gap-6">
+            {gallery.map((m, i) => (
+              <motion.div key={m.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group cursor-pointer rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-blue-500/40 transition-all duration-500" onClick={() => open(m, i)}>
+                <div className="relative aspect-square overflow-hidden">
+                  <img src={m.src} alt={m.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div>
+                      <h3 className="text-white font-bold text-lg">{m.title}</h3>
+                      <p className="text-white/60 text-sm">{m.desc}</p>
+                    </div>
                   </div>
-                )}
-
-                {/* Media Info */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">
-                    {selectedMedia.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    {selectedMedia.description}
-                  </p>
                 </div>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              {/* Counter */}
-              {galleryMedia.length > 1 && (
-                <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-white text-sm">
-                  {currentIndex + 1} / {galleryMedia.length}
-                </div>
-              )}
-            </div>
+      <section className="py-20 bg-gradient-to-r from-purple-600 to-blue-800">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto space-y-6">
+            <h2 className="text-4xl lg:text-5xl font-black text-white">Give Your Child the Gift of Boxing</h2>
+            <p className="text-lg text-purple-100">First class is free — no commitment required. Just bring a water bottle and a smile!</p>
+            <a href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-purple-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg">
+              Book Free Class <ArrowRight className="w-5 h-5" />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {selected && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/95 z-[99999] flex items-center justify-center p-4">
+            <button onClick={close} className="absolute top-6 right-6 z-50 w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center border border-white/20"><X className="w-5 h-5" /></button>
+            {gallery.length > 1 && (
+              <>
+                <button onClick={() => nav(-1)} className="absolute left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center border border-white/30"><ChevronLeft className="w-6 h-6" /></button>
+                <button onClick={() => nav(1)} className="absolute right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center border border-white/30"><ChevronRight className="w-6 h-6" /></button>
+              </>
+            )}
+            <motion.div key={selected.id} initial={{ scale: 0.95 }} animate={{ scale: 1 }} className="max-w-4xl w-full">
+              <img src={selected.src} alt={selected.title} className="w-full max-h-[75vh] object-contain rounded-2xl" />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -736,4 +191,4 @@ const KidsTeensBoxing = () => {
   );
 };
 
-export default KidsTeensBoxing;
+export default KidsTeens;
