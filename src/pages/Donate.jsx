@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Heart, Shield, Users, Award, CheckCircle } from "lucide-react";
+import { Heart, Shield, Users, Award, Phone, User, Smartphone, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Donate = () => {
   const [amount, setAmount] = useState("");
   const [customAmount, setCustomAmount] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [method, setMethod] = useState("");
 
   const presetAmounts = [10, 25, 50, 100, 250, 500];
 
@@ -121,72 +124,87 @@ const Donate = () => {
               transition={{ duration: 0.8 }}
               className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 lg:p-10"
             >
-              <h3 className="text-2xl font-black text-white mb-6">Choose Your Donation</h3>
+              <h3 className="text-2xl font-black text-white mb-6">Complete Your Donation</h3>
 
-              {/* Preset Amounts */}
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                {presetAmounts.map((preset) => (
-                  <button
-                    key={preset}
-                    onClick={() => {
-                      setAmount(preset.toString());
-                      setCustomAmount("");
-                    }}
-                    className={`py-3 px-4 rounded-xl font-bold text-lg transition-all duration-300 border ${
-                      amount === preset.toString()
-                        ? "bg-blue-600 border-blue-400 text-white"
-                        : "bg-white/5 border-white/20 text-white/70 hover:border-blue-500/50 hover:text-white"
-                    }`}
-                  >
-                    ${preset}
-                  </button>
-                ))}
-              </div>
-
-              {/* Custom Amount */}
-              <div className="mb-6">
-                <label className="block text-white/70 text-sm font-medium mb-2">
-                  Custom Amount
-                </label>
+              {/* Donor Name */}
+              <div className="mb-4">
+                <label className="block text-white/70 text-sm font-medium mb-2">Your Name</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-lg font-bold">
-                    $
-                  </span>
-                  <input
-                    type="number"
-                    min="1"
-                    value={customAmount}
-                    onChange={(e) => {
-                      setCustomAmount(e.target.value);
-                      setAmount("");
-                    }}
-                    placeholder="Enter amount"
-                    className="w-full bg-white/5 border border-white/20 text-white rounded-xl py-3 pl-8 pr-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 placeholder-white/30"
-                  />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your full name" className="w-full bg-white/5 border border-white/20 text-white rounded-xl py-3 pl-11 pr-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 placeholder-white/30" />
                 </div>
               </div>
 
-              {/* Donation Frequency */}
-              <div className="flex gap-3 mb-8">
-                <button className="flex-1 py-3 rounded-xl font-bold bg-blue-600 text-white border border-blue-400 transition-all duration-300">
-                  One Time
-                </button>
-                <button className="flex-1 py-3 rounded-xl font-bold bg-white/5 text-white/70 border border-white/20 hover:border-blue-500/50 hover:text-white transition-all duration-300">
-                  Monthly
-                </button>
+              {/* Phone Number */}
+              <div className="mb-4">
+                <label className="block text-white/70 text-sm font-medium mb-2">Phone Number</label>
+                <div className="relative">
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+250 7XX XXX XXX" className="w-full bg-white/5 border border-white/20 text-white rounded-xl py-3 pl-11 pr-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 placeholder-white/30" />
+                </div>
+              </div>
+
+              {/* Preset Amounts */}
+              <div className="mb-4">
+                <label className="block text-white/70 text-sm font-medium mb-2">Donation Amount</label>
+                <div className="grid grid-cols-3 gap-3">
+                  {presetAmounts.map((preset) => (
+                    <button key={preset} onClick={() => { setAmount(preset.toString()); setCustomAmount(""); }} className={`py-3 px-4 rounded-xl font-bold text-lg transition-all duration-300 border ${
+                      amount === preset.toString() ? "bg-blue-600 border-blue-400 text-white" : "bg-white/5 border-white/20 text-white/70 hover:border-blue-500/50 hover:text-white"
+                    }`}>${preset}</button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Custom Amount */}
+              <div className="mb-4">
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-lg font-bold">$</span>
+                  <input type="number" min="1" value={customAmount} onChange={(e) => { setCustomAmount(e.target.value); setAmount(""); }} placeholder="Custom amount" className="w-full bg-white/5 border border-white/20 text-white rounded-xl py-3 pl-8 pr-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 placeholder-white/30" />
+                </div>
+              </div>
+
+              {/* Payment Method */}
+              <div className="mb-6">
+                <label className="block text-white/70 text-sm font-medium mb-2">Payment Method</label>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { value: "MoMo", label: "MoMo", icon: Smartphone },
+                    { value: "Airtel", label: "Airtel Money", icon: Smartphone },
+                    { value: "Bank", label: "Bank Transfer", icon: Building2 },
+                  ].map((m) => {
+                    const Icon = m.icon;
+                    return (
+                      <button key={m.value} onClick={() => setMethod(m.value)} className={`flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl font-medium text-sm transition-all duration-300 border ${
+                        method === m.value ? "bg-blue-600 border-blue-400 text-white" : "bg-white/5 border-white/20 text-white/60 hover:border-blue-500/50 hover:text-white"
+                      }`}>
+                        <Icon className="w-4 h-4" />
+                        {m.label}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Donate Button */}
-              <Link
-                to="/contact"
-                className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-blue-600/25"
+              <button
+                onClick={() => {
+                  const finalAmount = amount || customAmount;
+                  if (!name || !phone || !finalAmount || !method) return;
+                  const msg = encodeURIComponent(
+                    `Hi Real Boxing Club,\n\nI would like to make a donation:\n\nName: ${name}\nPhone: ${phone}\nAmount: $${finalAmount}\nMethod: ${method}\n\nThank you!`
+                  );
+                  window.open(`https://wa.me/250781288442?text=${msg}`, "_blank");
+                }}
+                className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-blue-600/25 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={!name || !phone || (!amount && !customAmount) || !method}
               >
                 <Heart className="w-5 h-5" />
                 Donate Now
-              </Link>
+              </button>
 
               <p className="text-white/40 text-sm text-center mt-4">
-                Secure donation. You will receive a receipt via email.
+                You will be redirected to WhatsApp to confirm your donation.
               </p>
             </motion.div>
           </div>

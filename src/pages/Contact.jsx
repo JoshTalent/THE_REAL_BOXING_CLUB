@@ -38,7 +38,13 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const msg = encodeURIComponent(
+      `Hi Real Boxing Club,\n\nNew inquiry from ${formData.name}:\n\nEmail: ${formData.email}\nPhone: ${formData.phone}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}\n\nPlease get back to me. Thank you!`
+    );
+    window.open(`https://wa.me/250781288442?text=${msg}`, "_blank");
+
+    await new Promise((resolve) => setTimeout(resolve, 800));
     setIsSubmitting(false);
     setIsSubmitted(true);
     setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
