@@ -57,7 +57,7 @@ const Contact = () => {
       title: "Call Us",
       details: "+250 781 288 442",
       description: "Mon-Fri from 8am to 6pm",
-      link: "tel:+250788123456",
+      link: "tel:+250781288442",
       gradient: "from-green-500 to-emerald-600",
     },
     {
@@ -172,7 +172,7 @@ const Contact = () => {
 
               <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 pt-4">
                 <a
-                  href="tel:+250788123456"
+                  href="tel:+250781288442"
                   className="group relative px-8 py-4 bg-blue-600 text-white rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-600/30 flex items-center gap-3"
                 >
                   <Phone className="w-5 h-5" />
@@ -560,7 +560,7 @@ const Contact = () => {
           >
             <p className="text-white/80 mb-4">Still have questions? We are happy to help!</p>
             <a
-              href="tel:+250788123456"
+              href="tel:+250781288442"
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
             >
               <Phone className="w-5 h-5" />
@@ -591,14 +591,14 @@ const Contact = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <a
-                href="tel:+250788123456"
+                href="tel:+250781288442"
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-600/25 flex items-center justify-center gap-3"
               >
                 <Phone className="w-5 h-5" />
                 Call Now
               </a>
               <a
-                href="https://wa.me/250788123456"
+                href="https://wa.me/250781288442"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 border border-white/30 text-white hover:bg-white hover:text-black rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3"
